@@ -1,5 +1,9 @@
 package ru.job4j.tictactoe;
-
+/**
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import javafx.scene.shape.Rectangle;
 
 public class Figure3T extends Rectangle {

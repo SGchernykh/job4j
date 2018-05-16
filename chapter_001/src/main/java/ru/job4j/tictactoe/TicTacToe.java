@@ -1,5 +1,10 @@
 package ru.job4j.tictactoe;
-
+/**
+ * TicTacToe.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
