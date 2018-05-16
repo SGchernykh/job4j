@@ -18,11 +18,11 @@ public class ArrayDuplicate {
         for (int out = 0; out < unique; out++) {
             for (int in = out + 1; in < unique; in++) {
                 if (array[out].equals(array[in])) {
-                    variable = array[in] ;
-                    for (int inIn = in + 1; inIn < unique; inIn++){
-                        array[inIn-1] = array[inIn];
+                    variable = array[in];
+                    for (int inIn = in + 1; inIn < unique; inIn++) {
+                        array[inIn - 1] = array[inIn];
                     }
-                    array[unique-1] = variable ;
+                    array[unique - 1] = variable;
                     unique--;
                     in--;
                 }

@@ -12,10 +12,12 @@ public class Counter {
      * @param finish конец диапазона.
      * @return результат.
      */
-    public int add(int start, int finish){
+    public int add(int start, int finish) {
         int result = 0;
         for (int number = start; number <= finish; number++) {
-            if (number % 2 == 0 ) result += number;
+            if (number % 2 == 0) {
+                result += number;
+            }
         }
         return result;
     }
