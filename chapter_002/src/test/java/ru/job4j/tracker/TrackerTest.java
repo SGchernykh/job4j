@@ -24,7 +24,6 @@ public class TrackerTest {
         Item previous = new Item("test1", "testDescription", 123L);
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2", 1234L);
-        next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
@@ -51,9 +50,11 @@ public class TrackerTest {
         tracker.add(new Item("test2", "testDescription2", 1235L));
         tracker.add(new Item("test2", "testDescription2", 1232L));
         for (Item items : tracker.findByName("test2")) {
-            if (items != null) count++;
+            if (items != null) {
+                count++;
+            }
         }
-        assertThat(count,is(3));
+        assertThat(count, is(3));
     }
 
     @Test

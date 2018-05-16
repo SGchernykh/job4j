@@ -69,6 +69,7 @@ public class StartUI {
                 case FIND_ID : this.findById(); break;
                 case FIND_NAME : this.findByName(); break;
                 case EXIT : exit = true; break;
+                default: break;
             }
         }
     }
@@ -105,7 +106,7 @@ public class StartUI {
         String id = this.input.ask("Введите ID заявки: ");
         String name = this.input.ask("Введите новое имя заявки: ");
         String desc = this.input.ask("Введите новое описание: ");
-        Item item = new Item(name,desc);
+        Item item = new Item(name, desc);
         tracker.replace(id, item);
         System.out.println("------ Заявка с getId: " + item.getId() + " обновлена-----------");
     }

@@ -35,10 +35,11 @@ public class Tracker {
      * @param id идентификатор заявки.
      */
     public void replace(String id, Item item) {
-        for (int index = 0; index < this.position; index++)  {
-            if(item != null && this.items[index].getId().equals(id)){
+
+        for (int index = 0; index < this.position; index++) {
+            if (item != null && this.items[index].getId().equals(id)) {
                 this.items[index] = item;
-                item.setId(this.generateId());
+                item.setId(id);
             }
         }
     }
@@ -49,8 +50,8 @@ public class Tracker {
      */
     public void delete(String id) {
         for (int index = 0; index != this.position; index++) {
-            if(this.items[index] != null && this.items[index].getId().equals(id)) {
-                System.arraycopy(this.items,index + 1,this.items,index,this.position - index);
+            if (this.items[index] != null && this.items[index].getId().equals(id)) {
+                System.arraycopy(this.items, index + 1, this.items, index, this.position - index);
                 this.position--;
                 break;
             }
@@ -63,7 +64,7 @@ public class Tracker {
     public Item[] getAll() {
         Item[] result = new Item[this.position];
         for (int index = 0; index != this.position; index++) {
-           result[index] = this.items[index];
+            result[index] = this.items[index];
         }
         return result;
     }
@@ -77,7 +78,7 @@ public class Tracker {
         Item[] result = new Item[this.position];
         int count = 0;
         for (Item item : this.items) {
-            if(item != null && item.getName().equals(key)) {
+            if (item != null && item.getName().equals(key)) {
                 result[count] = item;
                 count++;
             }
@@ -92,7 +93,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
-            if(item != null && item.getId().equals(id)) {
+            if (item != null && item.getId().equals(id)) {
                 result = item;
                 break;
             }
