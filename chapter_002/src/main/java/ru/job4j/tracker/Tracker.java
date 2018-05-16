@@ -38,6 +38,7 @@ public class Tracker {
         for (int index = 0; index < this.position; index++)  {
             if(item != null && this.items[index].getId().equals(id)){
                 this.items[index] = item;
+                item.setId(this.generateId());
             }
         }
     }
