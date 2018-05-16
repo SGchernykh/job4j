@@ -14,11 +14,8 @@ public class Counter {
      */
     public int add(int start, int finish){
         int result = 0;
-
-        for (int i = start; i <= finish; i++) {
-
-            if (i % 2 == 0 ) result += i;
-
+        for (int number = start; number <= finish; number++) {
+            if (number % 2 == 0 ) result += number;
         }
         return result;
     }

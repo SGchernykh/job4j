@@ -25,15 +25,9 @@ public class ArrayDuplicate {
                     array[unique-1] = variable ;
                     unique--;
                     in--;
-
                 }
             }
         }
-
-
         return Arrays.copyOf(array, unique);
-
     }
-
-
 }

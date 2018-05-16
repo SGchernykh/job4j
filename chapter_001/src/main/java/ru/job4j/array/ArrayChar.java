@@ -11,7 +11,6 @@ public class ArrayChar {
     public ArrayChar(String line) {
         this.data = line.toCharArray();
     }
-
     /**
      * Проверяет. что слово начинается с префикса.
      * @param prefix префикс.
@@ -20,9 +19,8 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = false;
         char[] value = prefix.toCharArray();
-        // проверить. что массив data имеет первые элементы одинаковые с value
-        for (int j = 0; j < value.length; j++) {
-            if (this.data[j] == value[j]) result = true;
+        for (int index = 0; index < value.length; index++) {
+            if (this.data[index] == value[index]) result = true;
             else result = false;
         }
         return result;

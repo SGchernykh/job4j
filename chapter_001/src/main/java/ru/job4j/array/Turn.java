@@ -5,13 +5,16 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class Turn {
-
+    /**
+     * Array reversal.
+     * @param array source array.
+     * @return Array reversal.
+     */
     public int[] back(int[] array) {
-        for (int i = 0; i < array.length/2; i++) {
-            int temp = array[i];
-
-            array[i] = array[array.length - 1 -i];
-            array[array.length - 1 -i] = temp;
+        for (int index = 0; index < array.length/2; index++) {
+            int temp = array[index];
+            array[index] = array[array.length - 1 - index];
+            array[array.length - 1 - index] = temp;
         }
         return array;
     }
