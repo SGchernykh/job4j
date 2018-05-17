@@ -73,6 +73,15 @@ public class StartUI {
             }
         }
     }
+    
+    private void marginsItems(Item item) {
+        System.out.printf("ID заявки:%s |Имя заявки:%s |Описание:%s |Время создания заявки:%s |Коментарий к заявки:%s%n",
+                item.getId(),
+                item.getName(),
+                item.getDesc(),
+                item.getCreated(),
+                item.getComments());
+    }
 
     /**
      * Метод реализует добавленяи новый заявки в хранилище.
@@ -91,11 +100,7 @@ public class StartUI {
     private void allItem() {
         System.out.println("------------ Ваши заявки --------------");
         for (Item item : tracker.getAll()) {
-            System.out.print("--ID заявки: " + item.getId());
-            System.out.print(" ---Имя заявки: " + item.getName());
-            System.out.print(" ---Описание: " + item.getDesc());
-            System.out.print(" ---Время создания заявки: " + item.getCreated());
-            System.out.println(" --Коментарий к заявки: " + item.getComments());
+            this.marginsItems(item);
         }
     }
     /**
@@ -125,12 +130,7 @@ public class StartUI {
     private void findById() {
         System.out.println("------------ Поиск заявки по ID --------------");
         String id = this.input.ask("Введите ID заявки: ");
-        System.out.print(" --ID заявки: " + tracker.findById(id).getId());
-        System.out.print(" --Имя заявки: " + tracker.findById(id).getName());
-        System.out.print(" --Описание: " + tracker.findById(id).getDesc());
-        System.out.print(" --Время создания заявки: " + tracker.findById(id).getCreated());
-        System.out.println(" --Коментарий к заявки: " + tracker.findById(id).getComments());
-
+        this.marginsItems(tracker.findById(id));
     }
     /**
      * Метод реализует поиск заявки по ID.
@@ -140,11 +140,7 @@ public class StartUI {
         String name = this.input.ask("Введите name заявки: ");
         for (Item item : tracker.findByName(name)) {
             if (item != null) {
-                System.out.print("--ID заявки: " + item.getId());
-                System.out.print(" ---Имя заявки: " + item.getName());
-                System.out.print(" ---Описание: " + item.getDesc());
-                System.out.print(" ---Время создания заявки: " + item.getCreated());
-                System.out.println(" ---Коментарий к заявки: " + item.getComments());
+                this.marginsItems(item);
             }
         }
     }
