@@ -92,9 +92,9 @@ public class StartUI {
         System.out.println("------------ Ваши заявки --------------");
         for (Item item : tracker.getAll()) {
             System.out.print("--ID заявки: " + item.getId());
-            System.out.print(" --Имя заявки: " + item.getName());
-            System.out.print(" --Описание: " + item.getDesc());
-            System.out.print(" --Время создания заявки: " + item.getCreated());
+            System.out.print(" ---Имя заявки: " + item.getName());
+            System.out.print(" ---Описание: " + item.getDesc());
+            System.out.print(" ---Время создания заявки: " + item.getCreated());
             System.out.println(" --Коментарий к заявки: " + item.getComments());
         }
     }
@@ -141,10 +141,10 @@ public class StartUI {
         for (Item item : tracker.findByName(name)) {
             if (item != null) {
                 System.out.print("--ID заявки: " + item.getId());
-                System.out.print(" --Имя заявки: " + item.getName());
-                System.out.print(" --Описание: " + item.getDesc());
-                System.out.print(" --Время создания заявки: " + item.getCreated());
-                System.out.println(" --Коментарий к заявки: " + item.getComments());
+                System.out.print(" ---Имя заявки: " + item.getName());
+                System.out.print(" ---Описание: " + item.getDesc());
+                System.out.print(" ---Время создания заявки: " + item.getCreated());
+                System.out.println(" ---Коментарий к заявки: " + item.getComments());
             }
         }
     }
