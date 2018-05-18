@@ -21,9 +21,7 @@ public class StartUITest {
 
     private StringBuilder menuList() {
         StringBuilder menu = new StringBuilder()
-                .append("Меню.")
-                .append(System.lineSeparator())
-                .append("0. Add new Item.")
+                .append("0. Add the new item")
                 .append(System.lineSeparator())
                 .append("1. Show all items.")
                 .append(System.lineSeparator())
@@ -35,7 +33,7 @@ public class StartUITest {
                 .append(System.lineSeparator())
                 .append("5. Find items by name.")
                 .append(System.lineSeparator())
-                .append("6. Exit Program.")
+                .append("6. Exit.")
                 .append(System.lineSeparator());
         return menu;
     }
@@ -70,7 +68,7 @@ public class StartUITest {
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, this.tracker).init();
         assertThat(this.tracker.findByName("test name")[0].getName(), is("test name"));
     }
@@ -78,7 +76,7 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Item item = this.tracker.add(new Item("test1", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "y"});
         new StartUI(input, this.tracker).init();
         assertThat(this.tracker.findById(item.getId()).getName(), is("test name"));
     }
@@ -86,7 +84,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItemThenTrackerDeleteValue() {
         Item item = this.tracker.add(new Item("test1", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, this.tracker).init();
         assertThat((this.tracker.getAll().length), is(4));
     }
@@ -95,7 +93,7 @@ public class StartUITest {
     public void whenFindItemByNameThenTrackerDisplayValue() {
         Item items = this.tracker.add(new Item("test2", "testDescription", 123L));
         Item item = this.tracker.add(new Item("test2", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"5", "test2", "6"});
+        Input input = new StubInput(new String[]{"5", "test2", "y"});
         new StartUI(input, this.tracker).init();
         assertThat(
                 new String(out.toByteArray()),
@@ -106,7 +104,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append(this.marginsItems(items))
                                 .append(this.marginsItems(item))
-                                .append(this.menuList())
                                 .toString()
                 )
         );
@@ -114,7 +111,7 @@ public class StartUITest {
     @Test
     public void whenFindAllItemThenTrackerDisplayValue() {
         StringBuilder stringBuilder = new StringBuilder();
-        Input input = new StubInput(new String[]{"1",  "6"});
+        Input input = new StubInput(new String[]{"1",  "y"});
         new StartUI(input, this.tracker).init();
         for (Item value : this.tracker.getAll()) {
             stringBuilder.append(this.marginsItems(value));
@@ -127,7 +124,6 @@ public class StartUITest {
                                 .append("------------ Ваши заявки --------------")
                                 .append(System.lineSeparator())
                                 .append(stringBuilder)
-                                .append(this.menuList())
                                 .toString()
                 )
         );
