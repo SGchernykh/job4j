@@ -8,7 +8,7 @@ package ru.job4j.loop;
 public class Counter {
     /**
      * Сумма четных числе из диапазона.
-     * @param start начало диапазона.
+     * @param start начало  диапазона.
      * @param finish конец диапазона.
      * @return результат.
      */
