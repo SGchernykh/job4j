@@ -14,13 +14,13 @@ public class ArrayDuplicate {
      */
     public String[] remove(String[] array) {
         int unique = array.length;
-        String variable;
+        String variable = "";
         for (int out = 0; out < unique; out++) {
             for (int in = out + 1; in < unique; in++) {
                 if (array[out].equals(array[in])) {
                     variable = array[in];
-                    for (int inIn = in + 1; inIn < unique; inIn++) {
-                        array[inIn - 1] = array[inIn];
+                    for (int in_ = in + 1; in_ < unique; in_++) {
+                        array[in_ - 1] = array[in_];
                     }
                     array[unique - 1] = variable;
                     unique--;
