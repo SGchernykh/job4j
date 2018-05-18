@@ -18,6 +18,7 @@ public class ArrayDuplicateTest {
         String[] result = array.remove(input);
         assertThat(result, is(except));
     }
+
     @Test
     public void whenRemoveDuplicatesThenArrayWithoutDuplicateInt() {
         ArrayDuplicate array = new ArrayDuplicate();

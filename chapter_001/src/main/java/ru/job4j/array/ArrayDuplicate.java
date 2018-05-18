@@ -19,12 +19,12 @@ public class ArrayDuplicate {
             for (int in = out + 1; in < unique; in++) {
                 if (array[out].equals(array[in])) {
                     variable = array[in];
-                    for (int in_ = in + 1; in_ < unique; in_++) {
-                        array[in_ - 1] = array[in_];
+                    for (in += 1; in < unique; in++) {
+                        array[in - 1] = array[in];
                     }
                     array[unique - 1] = variable;
+                    in = out;
                     unique--;
-                    in--;
                 }
             }
         }
