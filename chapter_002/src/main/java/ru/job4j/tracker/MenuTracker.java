@@ -19,6 +19,7 @@ public class MenuTracker {
         this.action[5] = new FindByName();
         this.action[6] = new Exit();
     }
+
     public void select(int key) {
         this.action[key].execute(this.input, this.tracker);
     }
@@ -39,6 +40,7 @@ public class MenuTracker {
                 item.getCreated(),
                 item.getComments());
     }
+
     private static class AddItem implements UserAction {
         @Override
         public int key() {
@@ -50,13 +52,11 @@ public class MenuTracker {
             String name = input.ask("Please, enter the taks's name:");
             String desc = input.ask("Please, enter the taks's desc:");
             tracker.add(new Item(name, desc));
-
         }
         @Override
         public String info() {
             return String.format("%s. %s", this.key(), "Add the new item");
         }
-
     }
 
     private static class AllItem implements UserAction {
@@ -71,7 +71,6 @@ public class MenuTracker {
             for (Item item : tracker.getAll()) {
                 marginsItems(item);
             }
-
         }
 
         @Override
@@ -173,7 +172,6 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-
         }
 
         @Override
