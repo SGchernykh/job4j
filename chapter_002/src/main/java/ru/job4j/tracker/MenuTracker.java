@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 public class MenuTracker {
     private  Input input;
     private  Tracker tracker;
+
     private UserAction[] action = new UserAction[7];
 
     public MenuTracker(Input input, Tracker tracker) {
@@ -18,6 +19,14 @@ public class MenuTracker {
         this.action[4] = new FindById();
         this.action[5] = new FindByName();
         this.action[6] = new Exit();
+    }
+
+    public int[] rangeArray() {
+        int[] range = new int[this.action.length];
+        for (int index = 0; index < this.action.length; index++) {
+            range[index] = index;
+        }
+        return range;
     }
 
     public void select(int key) {
