@@ -14,25 +14,42 @@ public class Logic3T {
 
     public boolean isWinnerX() {
         boolean value = true;
-        for (int i = 0; i < 3; i++) {
-            if ((table[i][0].hasMarkX() == value && table[i][1].hasMarkX() == value && table[i][2].hasMarkX() == value) || (table[0][i].hasMarkX() == value && table[1][i].hasMarkX() == value && table[2][i].hasMarkX() == value)) {
+        for (int row = 0; row < this.table.length; row++) {
+            if (table[row][0].hasMarkX() == value && table[row][1].hasMarkX() == value && table[row][2].hasMarkX() == value) {
                 return true;
             }
         }
-        if ((table[0][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[2][2].hasMarkX() == value) || (table[2][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[0][2].hasMarkX() == value)) {
+        for (int col = 0; col < this.table.length; col++) {
+           if (table[0][col].hasMarkO() == value && table[1][col].hasMarkX() == value && table[2][col].hasMarkX() == value) {
+               return true;
+           }
+        }
+        if (table[0][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[2][2].hasMarkX() == value) {
+            return true;
+        }
+        if (table[2][0].hasMarkX() == value && table[1][1].hasMarkX() == value && table[0][2].hasMarkX() == value) {
             return true;
         }
         return false;
     }
 
+
     public boolean isWinnerO() {
         boolean value = true;
-        for (int i = 0; i < 3; i++) {
-            if ((table[i][0].hasMarkO() == value && table[i][1].hasMarkO() == value && table[i][2].hasMarkO() == value) || (table[0][i].hasMarkO() == value && table[1][i].hasMarkO() == value && table[2][i].hasMarkO() == value)) {
+        for (int row = 0; row < this.table.length; row++) {
+            if (table[row][0].hasMarkO() == value && table[row][1].hasMarkO() == value && table[row][2].hasMarkO() == value) {
                 return true;
             }
         }
-        if ((table[0][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[2][2].hasMarkO() == value) || (table[2][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[0][2].hasMarkO() == value)) {
+        for (int col = 0; col < this.table.length; col++) {
+            if (table[0][col].hasMarkO() == value && table[1][col].hasMarkO() == value && table[2][col].hasMarkO() == value) {
+                return true;
+            }
+        }
+        if (table[0][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[2][2].hasMarkO() == value) {
+            return true;
+        }
+        if (table[2][0].hasMarkO() == value && table[1][1].hasMarkO() == value && table[0][2].hasMarkO() == value) {
             return true;
         }
         return false;
