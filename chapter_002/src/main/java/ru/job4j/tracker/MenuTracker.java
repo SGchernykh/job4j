@@ -1,10 +1,12 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 public class MenuTracker {
     private  Input input;
     private  Tracker tracker;
 
-    private UserAction[] action = new UserAction[7];
+    private ArrayList<UserAction>  action = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -12,25 +14,25 @@ public class MenuTracker {
     }
 
     public void fillAction() {
-        this.action[0] = new AddItem(0, "Add the new item");
-        this.action[1] = new AllItem(1, "Show all items.");
-        this.action[2] = new EditItem(2, "Edit item.");
-        this.action[3] = new DeleteItem(3, "Delete item.");
-        this.action[4] = new FindById(4, "Find item by Id.");
-        this.action[5] = new FindByName(5, "Find items by name.");
-        this.action[6] = new Exit(6, "Exit.");
+        this.action.add(0, new AddItem(0, "Add the new item"));
+        this.action.add(1, new AllItem(1, "Show all items."));
+        this.action.add(2, new EditItem(2, "Edit item."));
+        this.action.add(3, new DeleteItem(3, "Delete item."));
+        this.action.add(4, new FindById(4, "Find item by Id."));
+        this.action.add(5, new FindByName(5, "Find items by name."));
+        this.action.add(6, new Exit(6, "Exit."));
     }
 
-    public int[] rangeArray() {
-        int[] range = new int[this.action.length];
-        for (int index = 0; index < this.action.length; index++) {
-            range[index] = index;
+    public ArrayList<Integer> rangeArray() {
+        ArrayList<Integer> range = new ArrayList<>();
+        for (int index = 0; index < this.action.size(); index++) {
+            range.add(index, index);
         }
         return range;
     }
 
     public void select(int key) {
-        this.action[key].execute(this.input, this.tracker);
+        this.action.get(key).execute(this.input, this.tracker);
     }
 
     public void show() {

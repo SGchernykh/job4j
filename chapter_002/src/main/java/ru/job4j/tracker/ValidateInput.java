@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
@@ -19,7 +19,7 @@ public class ValidateInput implements Input {
         return this.input.ask(question);
     }
 
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {

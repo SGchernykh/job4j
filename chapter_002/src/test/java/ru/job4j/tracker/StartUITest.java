@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -68,15 +69,26 @@ public class StartUITest {
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
+        ArrayList<String> list = new ArrayList<>();
+        list.add("0");
+        list.add("test name");
+        list.add("desc");
+        list.add("y");
+        Input input = new StubInput(list);
         new StartUI(input, this.tracker).init();
-        assertThat(this.tracker.findByName("test name")[0].getName(), is("test name"));
+        assertThat(this.tracker.findByName("test name").get(0).getName(), is("test name"));
     }
 
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Item item = this.tracker.add(new Item("test1", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "y"});
+        ArrayList<String> list = new ArrayList<>();
+        list.add("2");
+        list.add(item.getId());
+        list.add("test name");
+        list.add("desc");
+        list.add("y");
+        Input input = new StubInput(list);
         new StartUI(input, this.tracker).init();
         assertThat(this.tracker.findById(item.getId()).getName(), is("test name"));
     }
@@ -84,16 +96,24 @@ public class StartUITest {
     @Test
     public void whenDeleteItemThenTrackerDeleteValue() {
         Item item = this.tracker.add(new Item("test1", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
+        ArrayList<String> list = new ArrayList<>();
+        list.add("3");
+        list.add(item.getId());
+        list.add("y");
+        Input input = new StubInput(list);
         new StartUI(input, this.tracker).init();
-        assertThat((this.tracker.getAll().length), is(4));
+        assertThat((this.tracker.getAll().size()), is(4));
     }
 
     @Test
     public void whenFindItemByNameThenTrackerDisplayValue() {
         Item items = this.tracker.add(new Item("test2", "testDescription", 123L));
         Item item = this.tracker.add(new Item("test2", "testDescription", 123L));
-        Input input = new StubInput(new String[]{"5", "test2", "y"});
+        ArrayList<String> list = new ArrayList<>();
+        list.add("5");
+        list.add("test2");
+        list.add("y");
+        Input input = new StubInput(list);
         new StartUI(input, this.tracker).init();
         assertThat(
                 new String(out.toByteArray()),
@@ -111,7 +131,10 @@ public class StartUITest {
     @Test
     public void whenFindAllItemThenTrackerDisplayValue() {
         StringBuilder stringBuilder = new StringBuilder();
-        Input input = new StubInput(new String[]{"1",  "y"});
+        ArrayList<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("y");
+        Input input = new StubInput(list);
         new StartUI(input, this.tracker).init();
         for (Item value : this.tracker.getAll()) {
             stringBuilder.append(this.marginsItems(value));

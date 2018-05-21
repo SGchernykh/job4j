@@ -4,13 +4,14 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 0.1
  */
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
+    private final ArrayList<Item> items = new ArrayList<>();
     private static final Random RM = new Random();
 
 
@@ -25,7 +26,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(this.position++, item);
         return item;
     }
 
@@ -37,8 +38,8 @@ public class Tracker {
     public void replace(String id, Item item) {
 
         for (int index = 0; index < this.position; index++) {
-            if (item != null && this.items[index].getId().equals(id)) {
-                this.items[index] = item;
+            if (item != null && this.items.get(index).getId().equals(id)) {
+                this.items.add(index, item);
                 item.setId(id);
             }
         }
@@ -50,8 +51,8 @@ public class Tracker {
      */
     public void delete(String id) {
         for (int index = 0; index != this.position; index++) {
-            if (this.items[index] != null && this.items[index].getId().equals(id)) {
-                System.arraycopy(this.items, index + 1, this.items, index, this.position - index);
+            if (this.items.get(index) != null && this.items.get(index).getId().equals(id)) {
+                this.items.remove(index);
                 this.position--;
                 break;
             }
@@ -61,10 +62,10 @@ public class Tracker {
     /**
      * Метод реализаущий получение списка всех заявок.
      */
-    public Item[] getAll() {
-        Item[] result = new Item[this.position];
+    public ArrayList<Item> getAll() {
+        ArrayList<Item> result = new ArrayList<>();
         for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
+            result.add(index, this.items.get(index));
         }
         return result;
     }
@@ -74,12 +75,12 @@ public class Tracker {
      * Метод реализаущий получение списка по имени.
      * @param key имя
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[this.position];
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
         int count = 0;
         for (Item item : this.items) {
             if (item != null && item.getName().equals(key)) {
-                result[count] = item;
+                result.add(count, item);
                 count++;
             }
         }

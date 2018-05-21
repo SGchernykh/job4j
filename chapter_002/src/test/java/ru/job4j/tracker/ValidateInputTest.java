@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -33,10 +34,15 @@ public class ValidateInputTest {
 
     @Test
     public void whenInvalidInput() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("invalid");
+        list.add("1");
+        ArrayList<Integer> list1 = new ArrayList<>();
+        list1.add(1);
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[] {"invalid", "1"})
+                new StubInput(list)
         );
-        input.ask("Enter", new int[] {1});
+        input.ask("Enter", list1);
         assertThat(
                 this.mem.toString(),
                 is(

@@ -4,6 +4,7 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 0.1
  */
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {
@@ -14,7 +15,7 @@ public class ConsoleInput implements Input {
         return scanner.nextLine();
     }
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
