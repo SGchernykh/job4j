@@ -22,7 +22,7 @@ public class PriorityQueue {
             int size = this.tasks.size();
             for (int index = 0; index < size; index++) {
                 if (task.getPriority() < this.tasks.get(index).getPriority()) {
-                    this.tasks.add(index,task);
+                    this.tasks.add(index, task);
                     break;
                 }
             }

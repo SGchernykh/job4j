@@ -25,7 +25,7 @@ public class ConvertList2ArrayTest {
         int[][] expect = {
                 {1, 2, 3},
                 {4, 5, 6},
-                {7, 0 ,0}
+                {7, 0, 0}
         };
         assertThat(result, is(expect));
     }
@@ -37,7 +37,7 @@ public class ConvertList2ArrayTest {
         input.add(new int[]{1, 2});
         input.add(new int[]{3, 4, 5, 6});
         List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Integer> result =list.convert(input);
+        List<Integer> result = list.convert(input);
         assertThat(result, is(expect));
     }
 }
