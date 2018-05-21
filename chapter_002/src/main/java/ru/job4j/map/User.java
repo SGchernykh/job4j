@@ -5,10 +5,11 @@ package ru.job4j.map;
  * @version $Id$
  * @since 0.1
  */
-public class User {
+public class User implements Comparable<User> {
     private int id;
     private String name = "";
     private String city = "";
+    private int age;
 
     /**
      * Constructor User class.
@@ -20,6 +21,24 @@ public class User {
         this.id = id;
         this.name = name;
         this.city = city;
+    }
+
+    /**
+     * Constructor User class.
+     * @param name User name.
+     * @param age User age.
+     */
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    /**
+     * Getter Age.
+     * @return User age.
+     */
+    public int getAge() {
+        return age;
     }
 
     /**
@@ -38,7 +57,13 @@ public class User {
         return name;
     }
 
+    @Override
+    public int compareTo(User p){
+        return this.age - p.age;
+    }
 
-
-
+    @Override
+    public String toString() {
+        return  name + " " + age;
+    }
 }
