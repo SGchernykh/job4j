@@ -15,19 +15,17 @@ public class ConvertList2Array {
      * @return
      */
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = (int) (Math.ceil(((double) list.size() / rows)));
+        int cells = (int) Math.ceil((double) list.size() / rows);
         int[][] array = new int[rows][cells];
-        int size = list.size();
-        int index = 1;
-        for (int[] row : array) {
-            for (int column = 0; column < cells; column++) {
-                if (index <= size) {
-                    row[column] = list.get(index - 1);
-                } else {
-                    row[column] = 0;
-                }
-                index++;
+        int row = 0;
+        int column = 1;
+        for (int index : list) {
+            array[row][column - 1] = index;
+            if (column == cells) {
+                row++;
+                column = 0;
             }
+            column++;
         }
         return array;
     }
