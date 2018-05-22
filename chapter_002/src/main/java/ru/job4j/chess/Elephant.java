@@ -13,8 +13,8 @@ public class Elephant extends Figure {
 
     @Override
     Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        Cell[] cells = new Cell[dest.getX() - source.getX()];
-        if (source.getX() - source.getY() == dest.getX() - dest.getY()) {
+        Cell[] cells = new Cell[Math.abs(dest.getX() - source.getX())];
+        if (Math.abs(dest.getX() - source.getX()) == Math.abs(dest.getY() - source.getX())) {
             for (int index = 0; index < cells.length; index++) {
                 cells[index] = new Cell(dest.getX() - index, dest.getY() - index);
             }

@@ -45,6 +45,7 @@ public class BoardTest {
     @Test
     public void whenTheSelectedFigureBeMovedToCellGetTrue() {
         this.board.add(new Elephant(new Cell(6, 6)));
-        assertThat(this.board.move(new Cell(1, 1), new Cell(5, 5)), is(true));
+        this.board.move(new Cell(1, 1), new Cell(5, 5));
+        assertThat(this.board.move(new Cell(5, 5), new Cell(7, 3)), is(true));
     }
 }
