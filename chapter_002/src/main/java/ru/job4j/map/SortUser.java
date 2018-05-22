@@ -12,17 +12,23 @@ public class SortUser {
 
     /**
      * Method sort users by age.
-     * @param list List users
-     * @return TreeSet
+     * @param list List users.
+     * @return TreeSet.
      */
-    public Set<User> sort (List<User> list) {
+    public Set<User> sort(List<User> list) {
         TreeSet<User> result = new TreeSet<>();
         for (User user : list) {
             result.add(user);
         }
         return result;
     }
-    public List<User> sortNameLength (List<User> list) {
+
+    /**
+     * Method sort users by name length.
+     * @param list List users.
+     * @return Sorted List.
+     */
+    public List<User> sortNameLength(List<User> list) {
         List<User> result = new ArrayList<>();
         result.addAll(list);
         result.sort(
@@ -37,7 +43,12 @@ public class SortUser {
 
     }
 
-    public List<User> sortByAllFields (List<User> list) {
+    /**
+     * Method sort by All Fields.
+     * @param list List users.
+     * @return Sorted List.
+     */
+    public List<User> sortByAllFields(List<User> list) {
         List<User> result = new ArrayList<>();
         result.addAll(list);
         result.sort(
