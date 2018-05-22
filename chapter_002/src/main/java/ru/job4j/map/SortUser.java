@@ -15,15 +15,12 @@ public class SortUser {
      * @param list List users.
      * @return TreeSet.
      */
-    public Set<User> sort(List<User> list) {
-        TreeSet<User> result = new TreeSet<>();
-        for (User user : list) {
-            result.add(user);
-        }
+    public TreeSet<User> sort(List<User> list) {
+        TreeSet<User> result = new TreeSet<>(list);
         return result;
     }
 
-    /**
+    /**z
      * Method sort users by name length.
      * @param list List users.
      * @return Sorted List.
