@@ -16,8 +16,7 @@ public class SortUser {
      * @return TreeSet.
      */
     public TreeSet<User> sort(List<User> list) {
-        TreeSet<User> result = new TreeSet<>(list);
-        return result;
+        return new TreeSet<>(list);
     }
 
     /**z
