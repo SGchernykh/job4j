@@ -7,6 +7,7 @@ import java.util.Comparator;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
+ * Coffee Machine Test.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
  * @version $Id$
  * @since 0.1

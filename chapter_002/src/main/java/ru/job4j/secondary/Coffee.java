@@ -1,14 +1,18 @@
 package ru.job4j.secondary;
 /**
+ * Coffee Machine
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
  * @version $Id$
  * @since 0.1
  */
 public class Coffee {
+    /**
+     * Какие купюры есть для выдачи.
+     */
     private int[] coins = {10, 5, 2, 1};
 
     /**
-     *
+     * Метод оплаты кофе и получения сдачи.
      * @param value купюра.
      * @param price цена кофе.
      * @return сдача.
