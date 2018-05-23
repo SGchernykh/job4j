@@ -13,7 +13,7 @@ public class Tracker {
      */
     private final ArrayList<Item> items = new ArrayList<>();
     private static final Random RM = new Random();
-
+    private  int count = 1;
 
     /**
      * Указатель ячейки для новой заявки.
@@ -109,7 +109,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        String key = String.valueOf(RM.nextInt(100) * System.currentTimeMillis());
+        String key = String.valueOf(RM.nextInt(100) * System.currentTimeMillis() + this.count++);
         return key;
     }
 }
