@@ -2,8 +2,6 @@ package ru.job4j.secondary;
 
 import org.junit.Test;
 
-import java.util.Comparator;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
@@ -16,7 +14,7 @@ public class CoffeeTest {
     @Test
     public void whenInCoffeeMachineIntroduce50ForCoffee35Result105() {
         Coffee coffee = new Coffee();
-        assertThat(coffee.changes(50, 35), is(new int[]{10,5}));
+        assertThat(coffee.changes(50, 35), is(new int[]{10, 5}));
     }
 
     @Test
