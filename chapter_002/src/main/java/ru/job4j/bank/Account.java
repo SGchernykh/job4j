@@ -20,4 +20,9 @@ public class Account {
     public String  getRequisites() {
         return requisites;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Account{value=%s, requisites=%s}", value, requisites);
+    }
 }
