@@ -20,7 +20,8 @@ public class ListCompare implements Comparator<String> {
         int result = 0;
         final int lef = left.length();
         final int rig = right.length();
-        for (int index = 0; index < left.length(); index++) {
+        int size = Math.min(lef, rig);
+        for (int index = 0; index < size; index++) {
             if (left.charAt(index) > right.charAt(index)) {
                 result = 1;
                 break;

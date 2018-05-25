@@ -9,7 +9,6 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-
 public class BankTest {
     /**
      * Test bank system.
@@ -74,5 +73,4 @@ public class BankTest {
         boolean isTransfer = bank.transferMoney(genry.getPassport(), firstAccount.getRequisites(), mary.getPassport(), secondAccount.getRequisites(), 999);
         assertThat(isTransfer, is(false));
     }
-
 }
