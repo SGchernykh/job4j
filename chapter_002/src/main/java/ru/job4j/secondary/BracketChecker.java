@@ -10,10 +10,13 @@ import java.util.Deque;
  * @since 0.1
  */
 public class BracketChecker {
+    private final char[] beginning = {'{', '[', '(', '<'};
+    private final char[] ends = {'}', ']', ')', '>'};
     private String input;
 
     /**
      * Конструктор.
+     *
      * @param in строка для проверки.
      */
     public BracketChecker(String in) {
@@ -24,33 +27,32 @@ public class BracketChecker {
      * Метод для проверки вадидности заданной строки
      */
     public void check() {
-        boolean result = true;
+        boolean result = false;
         StringBuilder valid = new StringBuilder();
         Deque<Character> stack = new ArrayDeque<>(this.input.length());
         Deque<Integer> index = new ArrayDeque<>();
         for (int j = 0; j < input.length(); j++) {
             char ch = input.charAt(j);
-            switch (ch) {
-                case '{':
-                case '[':
-                case '(':
+            for (char begin : this.beginning) {
+                if (ch == begin) {
                     stack.add(ch);
                     index.add(j);
-                    break;
-                case '}':
-                case ']':
-                case ')':
+                }
+            }
+            for (char end : this.ends) {
+                if (ch == end) {
                     if (!stack.isEmpty()) {
                         char chx = stack.pollLast();
-                        if ((ch == '}' && chx == '{') || (ch == ']' && chx == '[') || (ch == ')' && chx == '(')) {
-                            valid.append(String.format("Valid: %s at %s | %s at %s %n", chx, index.pop(), ch, j));
-                        } else {
+                        for (int ind = 0; ind < this.beginning.length; ind++) {
                             result = false;
+                            if (ch == this.ends[ind] && chx == this.beginning[ind]) {
+                                valid.append(String.format("Valid: %s at %s | %s at %s %n", chx, index.pop(), ch, j));
+                                result = true;
+                                break;
+                            }
                         }
                     }
-                    break;
-                default:
-                    break;
+                }
             }
         }
         if (result) {
