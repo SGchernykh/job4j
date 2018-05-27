@@ -76,7 +76,7 @@ public class Bank {
      * @return True is valid, False is the no funds in account.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result = true;
+        boolean result = false;
         List<Account> accountsOfSrcUser = this.bank.get(this.dataP.get(srcPassport));
         List<Account> accountsOfDstUser = this.bank.get(this.dataP.get(destPassport));
         if (accountsOfSrcUser.contains(this.dataR.get(srcRequisite)) && this.dataR.get(srcRequisite).getValue() >= amount) {
@@ -86,8 +86,7 @@ public class Bank {
             newAccountValue = this.dataR.get(srcRequisite).getValue() - amount;
             newAccountRequisites = this.dataR.get(srcRequisite).getRequisites();
             accountsOfSrcUser.set(accountsOfSrcUser.indexOf(this.dataR.get(srcRequisite)), new Account(newAccountValue, newAccountRequisites));
-        } else {
-            result = false;
+            result = true;
         }
         return result;
     }
