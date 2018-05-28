@@ -1,21 +1,26 @@
 package ru.job4j.iterator;
-
+/**
+ * Test Iterator of prime numbers in array.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class PrimeIterator implements Iterator {
     /**
-     * @param array - array with numbers.
+     * @param array - Array with numbers.
      */
     private int[] array;
     /**
-     * @param index - index for array.
+     * @param index - The index is a Prime number.
      */
     private int index = 0;
 
     /**
-     * Constructor.
-     * @param array - array with numbers.
+     * Prime number iterator.
+     * @param array - Array numbers.
      */
     public PrimeIterator(int[] array) {
         this.array = array;
@@ -28,8 +33,8 @@ public class PrimeIterator implements Iterator {
         for (int iter = index; iter < this.array.length; iter++) {
             if (!result) {
                 count = 0;
-                for (int ind = 2; ind <= this.array[iter]; ind++) {
-                    if (this.array[iter] % ind == 0) {
+                for (int number = 2; number <= this.array[iter]; number++) {
+                    if (this.array[iter] % number == 0) {
                         this.index = iter;
                         result = true;
                         count++;

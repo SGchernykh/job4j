@@ -1,5 +1,10 @@
 package ru.job4j.iterator;
-
+/**
+ * Test Iterator of prime numbers in array.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -10,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class PrimeIteratorTest {
-
     private Iterator<Integer> it;
 
     @Before
