@@ -7,6 +7,7 @@ package ru.job4j.generic;
  */
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -62,9 +63,9 @@ public class SimpleArrayTest {
     @Test(expected = NoSuchElementException.class)
     public void whenBeyondTheBoundsOfTheArray() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(1);
-        simpleArray.add(1);
-        simpleArray.iterator().next();
-        assertThat(simpleArray.iterator().hasNext(), is(false));
-        simpleArray.iterator().next();
+        Iterator<Integer> it  = simpleArray.iterator();
+        it.next();
+        assertThat(it.hasNext(), is(false));
+        it.next();
     }
 }

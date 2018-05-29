@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] array;
     private int index = 0;
-    private int iter = 0;
+
 
     /**
      * Constructor.
@@ -67,6 +67,7 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+            private int iter = 0;
             private int count = index;
 
             @Override
