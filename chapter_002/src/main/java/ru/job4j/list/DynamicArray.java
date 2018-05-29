@@ -7,6 +7,7 @@ package ru.job4j.list;
  */
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DynamicArray<E> implements Iterable {
     private Object[] object;
@@ -76,20 +77,18 @@ public class DynamicArray<E> implements Iterable {
 
             @Override
             public boolean hasNext() {
-                if (modCount == count) {
-                    return (iter < index);
-                } else {
+                if (modCount != count) {
                     throw new ConcurrentModificationException("Modification array! Create new Iterator");
                 }
+                return (iter < index);
             }
 
             @Override
             public E next() {
                 if (!hasNext()) {
-                    return (E) object[iter++];
-                } else {
-                    throw new ConcurrentModificationException("Modification array! Create new Iterator");
+                    throw new NoSuchElementException("No more elements!");
                 }
+                return (E) object[iter++];
             }
         };
     }
