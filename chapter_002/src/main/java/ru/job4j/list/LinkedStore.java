@@ -1,4 +1,5 @@
 package ru.job4j.list;
+
 /**
  * Linked Store.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
@@ -42,6 +43,20 @@ public class LinkedStore<E> implements Iterable<E> {
         newNod.next = this.first;
         this.first = newNod;
         this.index++;
+    }
+
+    /**
+     * Deleted First element.
+     * @return Data.
+     */
+    public E deleteFirst() {
+            Node<E> temp = this.first;
+            if (this.first.next == null) {
+                this.last = null;
+            }
+            this.first = this.first.next;
+            this.index--;
+            return temp.date;
     }
 
     /**
