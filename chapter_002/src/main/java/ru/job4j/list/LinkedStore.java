@@ -89,6 +89,40 @@ public class LinkedStore<E> implements Iterable<E> {
         return find.date;
     }
 
+    /**
+     * The existence of an element in set.
+     * @param model Value type E.
+     * @return -1 if element is not found in set.
+     */
+    private int indexOf(E model) {
+        int index = 0;
+        if (model == null) {
+            for (Node<E> newNod = first; newNod != null; newNod = newNod.next) {
+                if (newNod.date == null) {
+                    return index;
+                }
+                index++;
+            }
+        } else {
+            for (Node<E> newNod = first; newNod != null; newNod = newNod.next) {
+                if (model.equals(newNod.date)) {
+                    return index;
+                }
+                index++;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * The existence of an element in set.
+     * @param model Value type E.
+     * @return True if element is found in set.
+     */
+    public boolean contains(E model) {
+        return indexOf(model) != -1;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
