@@ -69,6 +69,21 @@ public class DynamicArray<E> implements Iterable {
         this.object = newObject;
     }
 
+    /**
+     * Check for originality.
+     * @param value Value.
+     * @return True if value originality.
+     */
+    public boolean contains(E value) {
+        boolean result = true;
+        for (Object element : this.object) {
+            if (value.equals(element)) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
     @Override
     public Iterator iterator() {
         return new Iterator() {
