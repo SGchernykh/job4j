@@ -5,7 +5,7 @@ package ru.job4j.list;
  * @version $Id$
  * @since 0.1
  */
-public interface InterfaceSimple <E>{
+public interface InterfaceSimple<E> {
 
      /**
       * Deleted and get element from the structure.
