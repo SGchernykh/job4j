@@ -27,20 +27,16 @@ public class Converter {
         return new Iterator<Integer>() {
             @Override
             public boolean hasNext() {
-                if (!iterator.hasNext()) {
-                    if (iteratorIterator.hasNext()) {
-                        iterator = iteratorIterator.next();
-                    }
+                if (!iterator.hasNext() && iteratorIterator.hasNext() ) {
+                    iterator = iteratorIterator.next();
                 }
                 return iterator.hasNext();
             }
 
             @Override
             public Integer next() {
-                if (!iterator.hasNext()) {
-                    if (iteratorIterator.hasNext()) {
-                        iterator = iteratorIterator.next();
-                    }
+                if (!iterator.hasNext() && iteratorIterator.hasNext()) {
+                    iterator = iteratorIterator.next();
                 }
                 return iterator.next();
             }
