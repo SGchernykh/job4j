@@ -27,7 +27,7 @@ public class SimpleLinkedSet<T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return this.set.iterator();
     }
 }
