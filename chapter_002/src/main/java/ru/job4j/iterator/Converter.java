@@ -27,7 +27,7 @@ public class Converter {
         return new Iterator<Integer>() {
             @Override
             public boolean hasNext() {
-                if (!iterator.hasNext() && iteratorIterator.hasNext() ) {
+                if (!iterator.hasNext() && iteratorIterator.hasNext()) {
                     iterator = iteratorIterator.next();
                 }
                 return iterator.hasNext();
