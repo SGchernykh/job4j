@@ -8,15 +8,13 @@ package ru.job4j.hashmap;
  */
 import org.junit.Test;
 
-import java.util.Calendar;
-
 public class UserMapTest {
     UserMap map = new UserMap();
 
     @Test
     public void mapLesson2() {
-        User user1 = new User("test", 2, Calendar.getInstance());
-        User user2 = new User("test", 2, Calendar.getInstance());
+        User user1 = new User("test", 2, null);
+        User user2 = new User("test", 2, null);
         map.add(user1, 1);
         map.add(user2, 2);
         map.displayMap();
