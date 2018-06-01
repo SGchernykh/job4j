@@ -45,4 +45,9 @@ public class Node<E extends Comparable<E>> {
     public boolean eqValue(E that) {
         return this.value.compareTo(that) == 0;
     }
+
+    @Override
+    public String toString() {
+        return "Node{" + "value=" + value + '}';
+    }
 }
