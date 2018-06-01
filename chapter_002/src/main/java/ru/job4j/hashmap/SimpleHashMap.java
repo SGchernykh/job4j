@@ -89,7 +89,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
                 while (array[currentIndex] == null && currentIndex < array.length - 1) {
                     currentIndex++;
                 }
-                return array[currentIndex] != null ? true : false;
+                return array[currentIndex] != null;
             }
 
             @Override
