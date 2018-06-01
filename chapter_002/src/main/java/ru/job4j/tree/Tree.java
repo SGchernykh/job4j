@@ -15,6 +15,27 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         this.root = new Node<>(root);
     }
 
+    /**
+     * Method is Binary tree.
+     * @return True if Tree is Binary.
+     */
+    public boolean isBinary() {
+        boolean result = false;
+        if (root != null) {
+            Node<E> node = root;
+            if (!node.leaves().isEmpty() && node.leaves().size() < 2) {
+                for (Node<E> children : node.leaves()) {
+                    if (children.leaves().size() > 2) {
+                        result = false;
+                        break;
+                    }
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
