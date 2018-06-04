@@ -17,13 +17,16 @@ public class PingPong extends Application {
 
     @Override
     public void start(Stage stage) {
-        int limitX = 300;
-        int limitY = 300;
+        int limitX = 400;
+        int limitY = 500;
         Group group = new Group();
         Rectangle rect = new Rectangle(50, 100, 10, 10);
         group.getChildren().add(rect);
-        new Thread(new RectangleMove(rect, limitX)).start();
+        Thread thread = new Thread(new RectangleMove(rect, limitX));
+        thread.start();
         stage.setScene(new Scene(group, limitX, limitY));
+        stage.setOnCloseRequest(
+                event -> thread.interrupt());
         stage.setTitle(JOB4J);
         stage.setResizable(false);
         stage.show();
