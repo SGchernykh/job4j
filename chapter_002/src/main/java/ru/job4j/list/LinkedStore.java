@@ -6,13 +6,19 @@ package ru.job4j.list;
  * @version $Id$
  * @since 0.1
  */
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+@ThreadSafe
 public class LinkedStore<E> implements Iterable<E> {
     private int index = 0;
+    @GuardedBy("this")
     private Node<E> first;
+    @GuardedBy("this")
     private Node<E> last;
 
     /**
@@ -37,11 +43,13 @@ public class LinkedStore<E> implements Iterable<E> {
      */
     public void addFirst(E model) {
         Node<E> newNod = new Node<>(model);
-        if (isEmpty()) {
-            this.last = newNod;
+        synchronized (this) {
+            if (isEmpty()) {
+                this.last = newNod;
+            }
+            newNod.next = this.first;
+            this.first = newNod;
         }
-        newNod.next = this.first;
-        this.first = newNod;
         this.index++;
     }
 
@@ -50,13 +58,16 @@ public class LinkedStore<E> implements Iterable<E> {
      * @return Data.
      */
     public E deleteFirst() {
+        synchronized(this) {
             Node<E> temp = this.first;
             if (this.first.next == null) {
                 this.last = null;
             }
             this.first = this.first.next;
+
             this.index--;
             return temp.date;
+        }
     }
 
     /**
@@ -64,13 +75,16 @@ public class LinkedStore<E> implements Iterable<E> {
      * @param model Element type E
      */
     public void addLast(E model) {
+
         Node<E> newNod = new Node<>(model);
-        if (isEmpty()) {
-            this.first = newNod;
-        } else {
-            this.last.next = newNod;
+        synchronized(this) {
+            if (isEmpty()) {
+                this.first = newNod;
+            } else {
+                this.last.next = newNod;
+            }
+            this.last = newNod;
         }
-        this.last = newNod;
         this.index++;
     }
 
@@ -79,7 +93,7 @@ public class LinkedStore<E> implements Iterable<E> {
      * @param index Index element.
      * @return Element type E.
      */
-    public E get(int index) {
+    public synchronized E get(int index) {
         int iter = 0;
         Node<E> find = this.first;
         while (iter != index) {
@@ -94,7 +108,7 @@ public class LinkedStore<E> implements Iterable<E> {
      * @param model Value type E.
      * @return -1 if element is not found in set.
      */
-    private int indexOf(E model) {
+    private synchronized int indexOf(E model) {
         int index = 0;
         if (model == null) {
             for (Node<E> newNod = first; newNod != null; newNod = newNod.next) {
@@ -124,7 +138,7 @@ public class LinkedStore<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public synchronized Iterator<E> iterator() {
         return new Iterator<E>() {
             int modCount = index;
             private int currentIndex = 0;
