@@ -58,7 +58,7 @@ public class LinkedStore<E> implements Iterable<E> {
      * @return Data.
      */
     public E deleteFirst() {
-        synchronized(this) {
+        synchronized (this) {
             Node<E> temp = this.first;
             if (this.first.next == null) {
                 this.last = null;
@@ -77,7 +77,7 @@ public class LinkedStore<E> implements Iterable<E> {
     public void addLast(E model) {
 
         Node<E> newNod = new Node<>(model);
-        synchronized(this) {
+        synchronized (this) {
             if (isEmpty()) {
                 this.first = newNod;
             } else {
