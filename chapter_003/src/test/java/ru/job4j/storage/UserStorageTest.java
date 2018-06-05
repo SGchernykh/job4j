@@ -17,4 +17,21 @@ public class UserStorageTest {
         assertThat(stoge.getAmount(1), is(50));
     }
 
+    @Test
+    public void whenDeletedUser() {
+        UserStorage stoge = new UserStorage();
+        User user = new User(2, 200);
+        stoge.add(new User(1, 100));
+        stoge.add(user);
+        assertThat(stoge.delete(user), is(true));
+    }
+
+    @Test
+    public void whenUpdateUser() {
+        UserStorage stoge = new UserStorage();
+        stoge.add(new User(2, 200));
+        stoge.add(new User(1, 100));
+        stoge.update(new User(2, 150));
+        assertThat(stoge.getAmount(2), is(150));
+    }
 }

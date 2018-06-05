@@ -8,9 +8,8 @@ package ru.job4j.storage;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 @ThreadSafe
 public class UserStorage {
