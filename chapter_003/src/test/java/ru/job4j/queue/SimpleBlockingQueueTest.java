@@ -12,13 +12,11 @@ public class SimpleBlockingQueueTest {
     SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
 
     @Test
-    public void when() {
-    int count = 0;
+    public void whenTemplateProducerCustomer() {
         /**
          * Producer.
          */
         Thread producer = new Thread(new Producer(queue));
-
         /**
          * Customer.
          */
