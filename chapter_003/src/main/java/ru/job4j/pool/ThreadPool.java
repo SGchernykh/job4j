@@ -43,7 +43,7 @@ public class ThreadPool {
     /**
      * Close.
      */
-    public synchronized void shutdown() {
+    public  void shutdown() {
       while (!tasks.isEmpty()) {
           System.out.println("Waiting for execution " + this.tasks.size());
       }
