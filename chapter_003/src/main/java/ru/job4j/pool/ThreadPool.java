@@ -35,7 +35,7 @@ public class ThreadPool {
      * Add work.
      * @param job Job.
      */
-    public synchronized void work(Runnable job) {
+    public void work(Runnable job) {
         tasks.offer(job);
         notifyAll();
     }
@@ -43,7 +43,7 @@ public class ThreadPool {
     /**
      * Close.
      */
-    public  void shutdown() {
+    public void shutdown() {
       while (!tasks.isEmpty()) {
           System.out.println("Waiting for execution " + this.tasks.size());
       }
