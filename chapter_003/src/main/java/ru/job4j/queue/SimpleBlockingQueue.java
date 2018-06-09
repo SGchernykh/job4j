@@ -17,7 +17,6 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
     private int maxSize;
-    private boolean flag;
 
     /**
      * Constructor.
@@ -25,7 +24,6 @@ public class SimpleBlockingQueue<T> {
      */
     public SimpleBlockingQueue(int maxSize) {
         this.maxSize = maxSize;
-        this.flag = false;
     }
 
     /**
@@ -33,7 +31,7 @@ public class SimpleBlockingQueue<T> {
      * @param value Value.
      */
     public synchronized void offer(T value) {
-        while (flag) {
+        while (this.queue.size() == this.maxSize) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -42,9 +40,6 @@ public class SimpleBlockingQueue<T> {
         }
         this.queue.add(value);
         notifyAll();
-        if (this.queue.size() == this.maxSize) {
-            flag = true;
-        }
     }
 
     /**
@@ -61,7 +56,6 @@ public class SimpleBlockingQueue<T> {
         }
         T value = this.queue.poll();
         if (this.queue.size() != this.maxSize) {
-            this.flag = false;
             notifyAll();
         }
         return value;
