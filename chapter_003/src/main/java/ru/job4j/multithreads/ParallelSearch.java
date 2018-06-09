@@ -58,7 +58,7 @@ public class ParallelSearch {
         });
         search.start();
         read = new Thread(() -> {
-            while (finish || !files.isEmpty() ) {
+            while (finish || !files.isEmpty()) {
                 if (!files.isEmpty()) {
                     String file = files.poll();
                     try {
