@@ -55,7 +55,7 @@ public class NonBlockingCacheTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertThat(new String(out.toByteArray()), is("ru.job4j.сoncurrent.OptimisticException: Versions do not match!\r\n"));
+        assertThat(new String(out.toByteArray()), is("ru.job4j.optimistic.OptimisticException: Versions do not match!\r\n"));
 
     }
 }

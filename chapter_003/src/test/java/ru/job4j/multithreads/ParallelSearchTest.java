@@ -15,6 +15,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class ParallelSearchTest {
+    /*
     @Test
     public void whenFindMaInFileTxt() {
         ParallelSearch search = new ParallelSearch("C:\\projects\\test\\", "ma", Arrays.asList(".txt"));
@@ -22,4 +23,5 @@ public class ParallelSearchTest {
         List<String> expected = Arrays.asList("C:\\projects\\test\\adf\\New folder\\New Text Document.txt", "C:\\projects\\test\\dz\\q123u.txt", "C:\\projects\\test\\qu1.txt");
         assertThat(search.result(), is(expected));
     }
+    */
 }
