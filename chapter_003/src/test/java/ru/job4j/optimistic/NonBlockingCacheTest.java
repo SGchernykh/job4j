@@ -46,7 +46,9 @@ public class NonBlockingCacheTest {
         cache.add(base);
         cache.add(base2);
         Thread.UncaughtExceptionHandler exception = (th, ex) -> System.out.println(ex);
-        new Thread(() -> cache.update(new Base(2, "test " + Thread.currentThread().getName()))).start();
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> cache.update(new Base(2, "test " + Thread.currentThread().getName()))).start();
+        }
         Thread thread = new Thread(() -> cache.update(new Base(2, "test " + Thread.currentThread().getName())));
         thread.setUncaughtExceptionHandler(exception);
         thread.start();
@@ -56,6 +58,5 @@ public class NonBlockingCacheTest {
             e.printStackTrace();
         }
         assertThat(new String(out.toByteArray()), is("ru.job4j.optimistic.OptimisticException: Versions do not match!\r\n"));
-
     }
 }
