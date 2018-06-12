@@ -21,13 +21,13 @@ public class ParallelSearch {
     private final String root;
     private final String text;
     private final List<String> exts;
-    volatile boolean finish = true;
+    private volatile boolean finish = true;
     private Thread read;
 
-    @GuardedBy("files")
+    @GuardedBy("this")
     private final Queue<String> files = new LinkedList<>();
 
-    @GuardedBy("paths")
+    @GuardedBy("this")
     private final List<String> paths = new ArrayList<>();
 
     /**
@@ -45,7 +45,7 @@ public class ParallelSearch {
     /**
      * Init.
      */
-    public void init() {
+    public synchronized void init() {
         Thread search = new Thread(() -> {
             for (String ext : exts) {
                 try {
@@ -132,7 +132,7 @@ public class ParallelSearch {
             if (partOfName != null && !file.toString().endsWith(partOfName)) {
                 containsName = false;
             }
-            synchronized ("files") {
+            synchronized (files) {
                 if (containsName) {
                     files.add(file.toString());
                 }
