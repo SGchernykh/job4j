@@ -22,6 +22,8 @@ public class ParallelSearch {
     private final String text;
     private final List<String> exts;
     private volatile boolean finish = true;
+    private String file = "";
+    private boolean temp = false;
     private Thread read;
 
     @GuardedBy("this")
@@ -58,18 +60,20 @@ public class ParallelSearch {
         });
         search.start();
         read = new Thread(() -> {
-            synchronized (this) {
-                while (finish || !files.isEmpty()) {
-                    if (!files.isEmpty()) {
-                        String file = files.poll();
-                        try {
-                            Files.walkFileTree(Paths.get(file), new MyFileVisitorPaths(text));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+            while (finish || !temp) {
+                synchronized (this) {
+                    temp = files.isEmpty();
+                    file = files.poll();
+                }
+                if (!temp) {
+                    try {
+                        Files.walkFileTree(Paths.get(file), new MyFileVisitorPaths(text));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
-            }});
+            }
+        });
         read.start();
     }
 
