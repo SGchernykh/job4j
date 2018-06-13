@@ -7,56 +7,41 @@ package ru.job4j.deadlock;
  * @since 0.1
  */
 public class DeadLock {
-    public static Object lockA = new Object();
-    public static Object lockB = new Object();
+    private  final String name;
 
     /**
      * Constructor.
+     * @param name
      */
-    public DeadLock() {
-        Thread threadA = new ThreadA();
-        Thread threadB = new ThreadB();
-        threadA.start();
-        threadB.start();
+    public DeadLock(String name) {
+        this.name = name;
     }
 
     /**
-     * Thread A.
+     * Bow
+     * @param bower
      */
-    private class ThreadA extends Thread {
-        public void run() {
-            synchronized (lockA) {
-                System.out.println("Thread A: Holding lock B...");
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Thread A: Waiting for lock B...");
-                synchronized (lockB) {
-                    System.out.println("Thread 1: Holding lock A & B...");
-                }
-            }
-        }
+    public synchronized void bow(DeadLock bower) {
+        System.out.format("%s: %s has bowed to me!%n", this.name, bower.name);
+        bower.bowBack(this);
     }
 
     /**
-     * Thread B.
+     * Back bow
+     * @param bower
      */
-    private class ThreadB extends Thread {
-        public void run() {
-            synchronized (lockB) {
-                System.out.println("Thread B: Holding lock B...");
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Thread B: Waiting for lock A...");
-                synchronized (lockA) {
-                    System.out.println("Thread 2: Holding lock A & B...");
-                }
-            }
-        }
+    public synchronized void bowBack(DeadLock bower) {
+        System.out.format("%s: %s has bowed back to me!%n", this.name, bower.name);
+    }
+
+    /**
+     * Main
+     * @param args
+     */
+    public static void main(String[] args) {
+        final DeadLock alisa = new DeadLock("Alisa");
+        final DeadLock bob = new DeadLock("Bob");
+        new Thread(() -> alisa.bow(bob)).start();
+        new Thread(() -> bob.bow(alisa)).start();
     }
 }
