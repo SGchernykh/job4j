@@ -57,8 +57,8 @@ public class ParallelSearch {
             }
         });
         search.start();
-        synchronized (this) {
-            read = new Thread(() -> {
+        read = new Thread(() -> {
+            synchronized (this) {
                 while (finish || !files.isEmpty()) {
                     if (!files.isEmpty()) {
                         String file = files.poll();
@@ -69,9 +69,8 @@ public class ParallelSearch {
                         }
                     }
                 }
-            });
-            read.start();
-        }
+            }});
+        read.start();
     }
 
     /**
@@ -107,7 +106,7 @@ public class ParallelSearch {
             if (partOfContent != null && !content.contains(partOfContent)) {
                 containsContent = false;
             }
-            synchronized (this) {
+            synchronized (ParallelSearch.this) {
                 if (containsContent) {
                     paths.add(file.toString());
                 }
@@ -136,7 +135,7 @@ public class ParallelSearch {
             if (partOfName != null && !file.toString().endsWith(partOfName)) {
                 containsName = false;
             }
-            synchronized (this) {
+            synchronized (ParallelSearch.this) {
                 if (containsName) {
                     files.add(file.toString());
                 }
