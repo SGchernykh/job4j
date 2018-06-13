@@ -45,7 +45,7 @@ public class ParallelSearch {
     /**
      * Init.
      */
-    public synchronized void init() {
+    public  void init() {
         Thread search = new Thread(() -> {
             for (String ext : exts) {
                 try {
@@ -57,19 +57,21 @@ public class ParallelSearch {
             }
         });
         search.start();
-        read = new Thread(() -> {
-            while (finish || !files.isEmpty()) {
-                if (!files.isEmpty()) {
-                    String file = files.poll();
-                    try {
-                        Files.walkFileTree(Paths.get(file), new MyFileVisitorPaths(text));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        synchronized (this) {
+            read = new Thread(() -> {
+                while (finish || !files.isEmpty()) {
+                    if (!files.isEmpty()) {
+                        String file = files.poll();
+                        try {
+                            Files.walkFileTree(Paths.get(file), new MyFileVisitorPaths(text));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        });
-        read.start();
+            });
+            read.start();
+        }
     }
 
     /**
@@ -105,8 +107,10 @@ public class ParallelSearch {
             if (partOfContent != null && !content.contains(partOfContent)) {
                 containsContent = false;
             }
-            if (containsContent) {
-                paths.add(file.toString());
+            synchronized (this) {
+                if (containsContent) {
+                    paths.add(file.toString());
+                }
             }
             return FileVisitResult.CONTINUE;
         }
@@ -132,7 +136,7 @@ public class ParallelSearch {
             if (partOfName != null && !file.toString().endsWith(partOfName)) {
                 containsName = false;
             }
-            synchronized (files) {
+            synchronized (this) {
                 if (containsName) {
                     files.add(file.toString());
                 }
