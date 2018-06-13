@@ -37,8 +37,8 @@ public class Switcher {
      * Get
      * @return
      */
-    public synchronized String getString() {
-        return this.string.toString();
+    public synchronized StringBuilder getString() {
+        return this.string;
     }
 
     private class ThreadA extends Thread {
@@ -47,7 +47,6 @@ public class Switcher {
                 while (!flag) {
                     for (int count = 0; count < 10; count++) {
                         addString(1);
-                        System.out.println(string);
                     }
                     flag = true;
                 }
@@ -64,7 +63,7 @@ public class Switcher {
                 while (flag) {
                     for (int count = 0; count < 10; count++) {
                         addString(2);
-                        System.out.println(string);
+
                     }
                     flag = false;
                 }

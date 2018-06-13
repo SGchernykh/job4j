@@ -14,10 +14,10 @@ public class SwitcherTest {
     public void whenTwoThreadAddOneAndTwo() {
         Switcher switcher = new Switcher();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        switcher.getString();
+        System.out.println(switcher.getString());
     }
 }
