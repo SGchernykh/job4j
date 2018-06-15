@@ -14,7 +14,7 @@ public class Switcher {
     @GuardedBy("this")
     private StringBuilder string = new StringBuilder();
     private volatile boolean flag = false;
-
+    private FairLock lock = new FairLock();
     /**
      * Constructor.
      */
@@ -30,7 +30,15 @@ public class Switcher {
      * @param number Number.
      */
     private void addString(int number) {
-        this.string.append(String.valueOf(number));
+        try {
+            lock.lock();
+            this.string.append(String.valueOf(number));
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
     }
 
     /**
