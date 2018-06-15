@@ -33,6 +33,9 @@ public class Board {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.column; j++) {
                 this.board[i][j] = new ReentrantLock();
+                if (i % 2 != 0 && j %  2 != 0) {
+                    this.board[i][j].lock();
+                }
             }
         }
     }
@@ -67,14 +70,14 @@ public class Board {
     /**
      * Move.
      * @param source Source.
-     * @param dist Dist.
+     * @param dest Dest.
      * @return True if success move.
      */
-    public boolean moveCell(Cell source, Cell dist) {
+    public boolean moveCell(Cell source, Cell dest) {
         boolean result = false;
         if (addCell(source)) {
             try {
-                if (dist != null && this.board[dist.getX()][dist.getY()].tryLock(500, TimeUnit.MILLISECONDS)) {
+                if (dest != null && this.board[dest.getX()][dest.getY()].tryLock(5000, TimeUnit.MILLISECONDS)) {
                     try {
                         result = true;
                     } finally {
