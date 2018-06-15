@@ -1,5 +1,7 @@
 package ru.job4j.deadlock;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * DeadLock.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
@@ -7,41 +9,48 @@ package ru.job4j.deadlock;
  * @since 0.1
  */
 public class DeadLock {
-    private  final String name;
+    volatile ReentrantLock[] mas = new ReentrantLock[2];
 
-    /**
-     * Constructor.
-     * @param name
-     */
-    public DeadLock(String name) {
-        this.name = name;
+    public DeadLock() {
+        for (int index = 0; index < mas.length; index++) {
+            mas[index] = new ReentrantLock();
+        }
     }
 
-    /**
-     * Bow
-     * @param bower
-     */
-    public synchronized void bow(DeadLock bower) {
-        System.out.format("%s: %s has bowed to me!%n", this.name, bower.name);
-        bower.bowBack(this);
+    public void taking() {
+        try {
+            if (mas[0].tryLock()) {
+                if (mas[1].tryLock()) {
+                    mas[0].unlock();
+                }
+            } else {
+                if (mas[1].tryLock()) {
+
+                    if (mas[0].tryLock()) {
+                        mas[1].unlock();
+                    }
+                }
+            }
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Back bow
-     * @param bower
-     */
-    public synchronized void bowBack(DeadLock bower) {
-        System.out.format("%s: %s has bowed back to me!%n", this.name, bower.name);
-    }
-
-    /**
-     * Main
-     * @param args
-     */
     public static void main(String[] args) {
-        final DeadLock alisa = new DeadLock("Alisa");
-        final DeadLock bob = new DeadLock("Bob");
-        new Thread(() -> alisa.bow(bob)).start();
-        new Thread(() -> bob.bow(alisa)).start();
+        DeadLock deadLock = new DeadLock();
+        Thread alisa = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                deadLock.taking();
+
+            }
+        });
+        Thread bob = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                deadLock.taking();
+            }
+        });
+        alisa.start();
+        bob.start();
     }
 }
