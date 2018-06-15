@@ -20,7 +20,7 @@ public class Monster implements Runnable {
      * Constructor.
      * @param board Board.
      */
-    public Monster( final Board board, final int row, int column) {
+    public Monster(final Board board, final int row, int column) {
         this.row = row;
         this.column = column;
         this.board = board;
