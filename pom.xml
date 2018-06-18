@@ -16,8 +16,8 @@
     <modules>
         <module>chapter_001</module>
         <module>chapter_002</module>
-		<module>chapter_003</module>
-		<module>chapter_004</module>
+        <module>chapter_003</module>
+        <module>chapter_004</module>
     </modules>
 
     <build>
@@ -53,19 +53,17 @@
         </plugins>
     </build>
 
-    <dependency>
-        <groupId>postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>9.1-901-1.jdbc4</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.25</version>
-    </dependency>
-
     <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
@@ -84,5 +82,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
