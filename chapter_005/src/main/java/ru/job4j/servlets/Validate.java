@@ -16,7 +16,7 @@ public interface Validate {
      * @param login Login.
      * @param email Email.
      */
-    void add(String name, String login, String email);
+    boolean add(String name, String login, String email);
 
     /**
      * Update element with id.
@@ -25,13 +25,13 @@ public interface Validate {
      * @param login Login.
      * @param email Email.
      */
-    void update(int id, String name, String login, String email);
+    boolean update(int id, String name, String login, String email);
 
     /**
      * Deleted element with id.
      * @param id
      */
-    void delete(int id);
+    boolean delete(int id);
 
     /**
      * Find All

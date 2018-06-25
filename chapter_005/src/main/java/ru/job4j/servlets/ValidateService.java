@@ -27,7 +27,7 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public void add(String name, String login, String email) {
+    public boolean add(String name, String login, String email) {
         boolean result = true;
         for (Users user : this.logic.findAll()) {
             if ((email.equals(user.getEmail())) && login.equals(user.getLogin())) {
@@ -38,20 +38,27 @@ public class ValidateService implements Validate {
         if (result) {
             this.logic.add(name, login, email);
         }
+        return result;
     }
 
     @Override
-    public void update(int id, String name, String login, String email) {
+    public boolean update(int id, String name, String login, String email) {
+        boolean result = false;
         if (id < this.logic.findAll().size() && id >= 0) {
             this.logic.update(id, name, login, email);
+            result = true;
         }
+        return result;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
+        boolean result = false;
         if (id < this.logic.findAll().size() && id >= 0) {
             this.logic.delete(id);
+            result = true;
         }
+        return result;
     }
 
     @Override

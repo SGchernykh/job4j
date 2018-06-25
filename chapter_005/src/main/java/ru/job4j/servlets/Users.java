@@ -38,6 +38,18 @@ public class Users {
         return email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
     @Override
     public String toString() {
         return "Users{" + "name='" + name + '\'' + ", login='" + login + '\'' + ", email='" + email + '\'' + '}';
