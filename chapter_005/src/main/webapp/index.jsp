@@ -1,5 +1,5 @@
 <%@ page import="ru.job4j.servlets.Users" %>
-<%@ page import="ru.job4j.servlets.MemoryStore" %>
+<%@ page import="ru.job4j.servlets.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,7 +16,7 @@
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    <% for (Users user : MemoryStore.getInstance().findAll()) {%>
+    <% for (Users user : ValidateService.getInstance().findAll()) {%>
     <tr>
         <th><%=user.getId()%></th>
         <th><%=user.getName()%></th>

@@ -9,7 +9,7 @@ package ru.job4j.servlets;
 import java.util.List;
 
 public class ValidateService implements Validate {
-    private final Store logic = MemoryStore.getInstance();
+    private final Store logic = DBStore.getInstance();
     private static final Validate INSTANCE = new ValidateService();
 
     /**
@@ -43,22 +43,14 @@ public class ValidateService implements Validate {
 
     @Override
     public boolean update(int id, String name, String login, String email) {
-        boolean result = false;
-        if (id < this.logic.findAll().size() && id >= 0) {
-            this.logic.update(id, name, login, email);
-            result = true;
-        }
-        return result;
+        this.logic.update(id, name, login, email);
+        return true;
     }
 
     @Override
     public boolean delete(int id) {
-        boolean result = false;
-        if (id < this.logic.findAll().size() && id >= 0) {
-            this.logic.delete(id);
-            result = true;
-        }
-        return result;
+        this.logic.delete(id);
+        return true;
     }
 
     @Override
@@ -68,10 +60,6 @@ public class ValidateService implements Validate {
 
     @Override
     public Users findById(int id) {
-        Users user = null;
-        if (id < this.logic.findAll().size() && id >= 0) {
-            user = this.logic.findById(id);
-        }
-        return user;
+        return this.logic.findById(id);
     }
 }

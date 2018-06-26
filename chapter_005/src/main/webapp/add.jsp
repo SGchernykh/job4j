@@ -1,5 +1,3 @@
-<%@ page import="ru.job4j.servlets.Users" %>
-<%@ page import="ru.job4j.servlets.MemoryStore" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

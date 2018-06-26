@@ -1,13 +1,13 @@
 <%@ page import="ru.job4j.servlets.Users" %>
-<%@ page import="ru.job4j.servlets.MemoryStore" %>
+<%@ page import="ru.job4j.servlets.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h2>Add new user to database</h2>
-<%Users user = MemoryStore.getInstance().findById(Integer.parseInt(request.getParameter("id")));%>
+<h2>Update new user to database</h2>
+<%Users user = ValidateService.getInstance().findById(Integer.parseInt(request.getParameter("id")));%>
 <form action = '<%=request.getContextPath()%>/users' method='post'>
     Name: <input type='text' name='name' value="<%=user.getName()%>"/><br />
     Login: <input type='text' name='login' value="<%=user.getLogin()%>"/><br />
