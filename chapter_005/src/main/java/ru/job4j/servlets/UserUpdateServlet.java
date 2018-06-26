@@ -16,6 +16,6 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.getRequestDispatcher("/update.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/update.jsp").forward(req, resp);
     }
 }

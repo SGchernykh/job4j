@@ -15,13 +15,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.UsersServlet</servlet-class>
+        <servlet-name>UsersViewServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UsersViewServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
+        <servlet-name>UsersViewServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -7,8 +7,9 @@
 </head>
 <body>
 <h2>Update new user to database</h2>
+
 <%Users user = ValidateService.getInstance().findById(Integer.parseInt(request.getParameter("id")));%>
-<form action = '<%=request.getContextPath()%>/users' method='post'>
+<form action = '<%=request.getContextPath()%>/' method='post'>
     Name: <input type='text' name='name' value="<%=user.getName()%>"/><br />
     Login: <input type='text' name='login' value="<%=user.getLogin()%>"/><br />
     Email: <input type='text' name='email' value="<%=user.getEmail()%>"/><br />
