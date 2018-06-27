@@ -1,21 +1,24 @@
-package ru.job4j.servlets;
+package ru.job4j.web.servlet;
 
 /**
- * UserCreateServlet.
+ * AdminCreateServlet.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.store.DBStore;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserCreateServlet extends HttpServlet {
+public class AdminCreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.getRequestDispatcher("/WEB-INF/views/add.jsp").forward(req, resp);
+        req.setAttribute("roles", DBStore.getInstance().roleAll());
+        req.getRequestDispatcher("/WEB-INF/views/addAdmin.jsp").forward(req, resp);
     }
 }

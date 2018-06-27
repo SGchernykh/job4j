@@ -8,10 +8,12 @@
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Login</th>
-        <th>Email</th>
-        <th>CreateData</th>
+        <th>name</th>
+        <th>login</th>
+        <th>password</th>
+        <th>email</th>
+        <th>create date</th>
+        <th>role</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -20,16 +22,18 @@
         <td><c:out value="${user.id}"></c:out></td>
         <td><c:out value="${user.name}"></c:out></td>
         <td><c:out value="${user.login}"></c:out></td>
+        <td><c:out value="${user.password}"></c:out></td>
         <td><c:out value="${user.email}"></c:out></td>
-        <td><c:out value="${user.createDate}"></c:out></td>
+        <td><c:out value="${date.format(user.createDate)}"></c:out></td>
+        <td><c:out value="${user.role.role}"></c:out></td>
         <th>
-            <form action="${pageContext.servletContext.contextPath}/update" method="get">
+            <form action="${pageContext.servletContext.contextPath}/admin/updateAdmin" method="get">
                 <input type="hidden" name="id" value="${user.id}"/>
                 <input type="submit" value="update"/>
             </form>
         </th>
         <th>
-            <form action="${pageContext.servletContext.contextPath}/" method="post">
+            <form action="${pageContext.servletContext.contextPath}/admin" method="post">
                 <input type="hidden" name="id" value="${user.id}"/>
                 <input type="submit" name="action" value="delete"/>
             </form>
@@ -37,7 +41,7 @@
     </tr>
 </c:forEach>
 </table>
-<form action="${pageContext.servletContext.contextPath}/add" method="get">
+<form action="${pageContext.servletContext.contextPath}/admin/addAdmin" method="get">
     <input type="submit" value="add"/>
 </form>
 </body>

@@ -1,4 +1,4 @@
-package ru.job4j.servlets;
+package ru.job4j.web.store;
 
 /**
  * ValidateService.
@@ -6,6 +6,8 @@ package ru.job4j.servlets;
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.model.Users;
+
 import java.util.List;
 
 public class ValidateService implements Validate {
@@ -27,23 +29,23 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public boolean add(String name, String login, String email) {
+    public boolean add(Users users) {
         boolean result = true;
         for (Users user : this.logic.findAll()) {
-            if ((email.equals(user.getEmail())) && login.equals(user.getLogin())) {
+            if ((users.getEmail().equals(user.getEmail())) && users.getLogin().equals(user.getLogin())) {
                 result = false;
                 break;
             }
         }
         if (result) {
-            this.logic.add(name, login, email);
+            this.logic.add(users);
         }
         return result;
     }
 
     @Override
-    public boolean update(int id, String name, String login, String email) {
-        this.logic.update(id, name, login, email);
+    public boolean update(Users users) {
+        this.logic.update(users);
         return true;
     }
 

@@ -1,13 +1,16 @@
-package ru.job4j.servlets;
+package ru.job4j.web.store;
+
 /**
- * Store.
+ * Validate.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.model.Users;
+
 import java.util.List;
 
-public interface Store {
+public interface Validate {
 
     /**
      * Add element.
@@ -15,7 +18,7 @@ public interface Store {
      * @param login Login.
      * @param email Email.
      */
-    void add(String name, String login, String email);
+    boolean add(Users user);
 
     /**
      * Update element with id.
@@ -24,13 +27,13 @@ public interface Store {
      * @param login Login.
      * @param email Email.
      */
-    void update(int id, String name, String login, String email);
+    boolean update(Users users);
 
     /**
      * Deleted element with id.
      * @param id
      */
-    void delete(int id);
+    boolean delete(int id);
 
     /**
      * Find All

@@ -1,4 +1,4 @@
-package ru.job4j.servlets;
+package ru.job4j.web.store;
 /**
  * Settings.
  * @author Sergey Chernykh(chernykh.sergey95@gmail.com)

@@ -1,4 +1,4 @@
-package ru.job4j.servlets;
+package ru.job4j.web.store;
 
 /**
  * MemoryStore.
@@ -6,6 +6,9 @@ package ru.job4j.servlets;
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.model.Role;
+import ru.job4j.web.model.Users;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -21,13 +24,11 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public void add(String name, String login, String email) {
-        this.base.add(new Users(count++, name, login, email));
+    public void add(Users users) {
     }
 
     @Override
-    public void update(int id, String name, String login, String email) {
-        this.base.set(id, new Users(id, name, login, email));
+    public void update(Users users) {
     }
 
     @Override
@@ -52,5 +53,15 @@ public class MemoryStore implements Store {
      */
     public static Store getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public Users getUserByLoginAndPassword(String login, String password) {
+        return null;
+    }
+
+    @Override
+    public List<Role> roleAll() {
+        return null;
     }
 }
