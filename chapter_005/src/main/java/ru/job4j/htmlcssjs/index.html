@@ -7,11 +7,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var result = true;
+            var value1 =$('#name').val();
+            var value2 = $('#surname').val();
+            var value = $('#description').val();
+            if (value == '' ) {
+                result=false;
+                alert($('#description').attr('placeholder'));
+            }
+            if (value1 == '' ) {
+                result=false;
+                alert($('#name').attr('placeholder'));
+            }
+            if (value2 == '' ) {
+                result=false;
+                alert($('#surname').attr('placeholder'));
+            }
+            return result;
+        }
+    </script>
 </head>
 <body>
 <div class="container">
     <div class="col col-md-4">
-        <form>
+        <form action = "/index" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
@@ -31,6 +52,7 @@
                 <label for="description">Description:</label>
                 <textarea type="text" class="form-control" id="description" placeholder="Enter description" name="description"></textarea>
             </div>
+            <input type="submit" name="action" value="add" onclick="return validate();"/>
         </form>
     </div>
     <div class="table">
