@@ -19,6 +19,8 @@ public class Users {
     private  String email;
     private Timestamp createDate;
     private Role role;
+    private Country country;
+    private City city;
 
     /**
      * Constructor form.
@@ -27,7 +29,7 @@ public class Users {
      * @param login Login.
      * @param email email.
      */
-    public Users(int id, String name, String login, String password, String email, Timestamp createDate, Role role) {
+    public Users(int id, String name, String login, String password, String email, Timestamp createDate, Role role, Country country, City city) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -35,6 +37,8 @@ public class Users {
         this.email = email;
         this.createDate = createDate;
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
 
     public Users(int id, String name, String login, String email) {
@@ -81,4 +85,13 @@ public class Users {
     public Role getRole() {
         return role;
     }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
 }

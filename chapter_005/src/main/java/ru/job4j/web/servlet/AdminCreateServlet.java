@@ -18,7 +18,6 @@ public class AdminCreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.setAttribute("roles", DBStore.getInstance().roleAll());
-        req.getRequestDispatcher("/WEB-INF/views/addAdmin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/html/addAdmin.html").forward(req, resp);
     }
 }

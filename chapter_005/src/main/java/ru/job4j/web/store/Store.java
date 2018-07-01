@@ -5,6 +5,8 @@ package ru.job4j.web.store;
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.model.City;
+import ru.job4j.web.model.Country;
 import ru.job4j.web.model.Role;
 import ru.job4j.web.model.Users;
 
@@ -46,4 +48,14 @@ public interface Store {
     Users getUserByLoginAndPassword(final String login, final String password);
 
     List<Role> roleAll();
+
+    List<Country> countryAll();
+
+    List<City> cityByNameCountry(Integer idCountry);
+
+    Country countryByName(String name);
+
+    Role roleByName(String name);
+
+    City cityByName(String name);
 }

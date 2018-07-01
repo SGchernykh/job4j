@@ -6,6 +6,8 @@ package ru.job4j.web.store;
  * @version $Id$
  * @since 0.1
  */
+import ru.job4j.web.model.City;
+import ru.job4j.web.model.Country;
 import ru.job4j.web.model.Role;
 import ru.job4j.web.model.Users;
 
@@ -62,6 +64,31 @@ public class MemoryStore implements Store {
 
     @Override
     public List<Role> roleAll() {
+        return null;
+    }
+
+    @Override
+    public List<Country> countryAll() {
+        return null;
+    }
+
+    @Override
+    public List<City> cityByNameCountry(Integer idCountry) {
+        return null;
+    }
+
+    @Override
+    public Country countryByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Role roleByName(String name) {
+        return null;
+    }
+
+    @Override
+    public City cityByName(String name) {
         return null;
     }
 }

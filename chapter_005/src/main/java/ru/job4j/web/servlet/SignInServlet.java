@@ -20,7 +20,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/signin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/html/signin.html").forward(req, resp);
     }
 
     @Override
@@ -30,13 +30,16 @@ public class SignInServlet extends HttpServlet {
         Users user = DBStore.getInstance().getUserByLoginAndPassword(login, password);
         HttpSession session = req.getSession();
         if (user != null) {
-            if (user.getRole().getRole().equals("admin")) {
+            session.setAttribute("user", user);
+            req.getRequestDispatcher("/WEB-INF/html/indexAdmin.html").forward(req, resp);
+            /*if (user.getRole().getRole().equals("admin")) {
                 session.setAttribute("user", user);
-                resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
+                //resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
+                req.getRequestDispatcher("/WEB-INF/html/indexAdmin.html").forward(req, resp);
             } else if (user.getRole().getRole().equals("user")) {
                 session.setAttribute("user", user);
                 resp.sendRedirect(String.format("%s/user", req.getContextPath()));
-            }
+            }*/
         } else {
             req.setAttribute("error", "Credential invalid!");
             doGet(req, resp);

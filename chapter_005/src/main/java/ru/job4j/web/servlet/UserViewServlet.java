@@ -8,6 +8,8 @@ package ru.job4j.web.servlet;
  */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.web.model.City;
+import ru.job4j.web.model.Country;
 import ru.job4j.web.model.Role;
 import ru.job4j.web.model.Users;
 import ru.job4j.web.store.Validate;
@@ -48,7 +50,7 @@ public class UserViewServlet extends HttpServlet {
      */
     private void initAction() {
         if (operation.size() == 0) {
-            this.operation.put("update", req -> this.logic.update(new Users(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("password"), req.getParameter("email"), new Timestamp(System.currentTimeMillis()), new Role(2, "user"))));
+            this.operation.put("update", req -> this.logic.update((new Users(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("password"), req.getParameter("email"), new Timestamp(System.currentTimeMillis()), new Role(Integer.parseInt(req.getParameter("role_id")), req.getParameter("role")), new Country(Integer.parseInt(req.getParameter("country_id")), req.getParameter("country")), new City(Integer.parseInt(req.getParameter("city_id")), req.getParameter("city"), Integer.parseInt(req.getParameter("country_id")))))));
             this.operation.put("delete", req -> this.logic.delete(Integer.parseInt(req.getParameter("id"))));
         }
     }

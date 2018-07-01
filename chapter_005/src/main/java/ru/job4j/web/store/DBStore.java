@@ -9,6 +9,8 @@ package ru.job4j.web.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.web.model.City;
+import ru.job4j.web.model.Country;
 import ru.job4j.web.model.Role;
 import ru.job4j.web.model.Users;
 
@@ -124,8 +126,16 @@ public class DBStore implements Store {
         Connection conn = DriverManager.getConnection(settings.getValue("ServletUrl"), settings.getValue("userName"), settings.getValue("password"));
         try (Statement statement = conn.createStatement()) {
             conn.setAutoCommit(false);
+            statement.execute(settings.getValue("createTableCountry"));
+            statement.execute(settings.getValue("createTableCity"));
             statement.execute(settings.getValue("createTableRole"));
             statement.execute(settings.getValue("createTableUser"));
+            statement.executeUpdate(settings.getValue("countryRussia"));
+            statement.executeUpdate(settings.getValue("countryChina"));
+            statement.executeUpdate(settings.getValue("countryUSA"));
+            statement.executeUpdate(settings.getValue("cityEkb"));
+            statement.executeUpdate(settings.getValue("cityBeijing"));
+            statement.executeUpdate(settings.getValue("cityMoscow"));
             statement.executeUpdate(settings.getValue("roleAdmin"));
             statement.executeUpdate(settings.getValue("roleUser"));
             statement.executeUpdate(settings.getValue("userAdmin"));
@@ -155,6 +165,8 @@ public class DBStore implements Store {
             ps.setString(4, user.getEmail());
             ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
             ps.setInt(6, user.getRole().getId());
+            ps.setInt(7, user.getCountry().getId());
+            ps.setInt(8, user.getCity().getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -164,13 +176,15 @@ public class DBStore implements Store {
     @Override
     public void update(Users user) {
         try (Connection conn = this.dataSource.getConnection();
-                PreparedStatement ps = conn.prepareStatement(settings.getValue("updateAdmin"))) {
+                PreparedStatement ps = conn.prepareStatement(settings.getValue("update"))) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getPassword());
             ps.setString(4, user.getEmail());
             ps.setInt(5, user.getRole().getId());
-            ps.setInt(6, user.getId());
+            ps.setInt(6, user.getCountry().getId());
+            ps.setInt(7, user.getCity().getId());
+            ps.setInt(8, user.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -195,7 +209,7 @@ public class DBStore implements Store {
                 Statement statement = conn.createStatement()) {
             try (ResultSet rs = statement.executeQuery(settings.getValue("getAll"))) {
                 while (rs.next()) {
-                    Users user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"), rs.getString("email"), rs.getTimestamp("create_date"), new Role(Integer.parseInt(rs.getString("role_id")), rs.getString("role")));
+                    Users user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"), rs.getString("email"), rs.getTimestamp("create_date"), new Role(Integer.parseInt(rs.getString("role_id")), rs.getString("role")), new Country(rs.getInt("country_id"), rs.getString("country")), new City(rs.getInt("city_id"), rs.getString("city"), rs.getInt("country_id")));
                     users.add(user);
                 }
             }
@@ -213,7 +227,7 @@ public class DBStore implements Store {
             statement.setInt(1, id);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("email"));
+                    user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"), rs.getString("email"), rs.getTimestamp("create_date"), new Role(Integer.parseInt(rs.getString("role_id")), rs.getString("role")), new Country(rs.getInt("country_id"), rs.getString("country")), new City(rs.getInt("city_id"), rs.getString("city"), rs.getInt("country_id")));
                 }
             }
         } catch (SQLException e) {
@@ -230,7 +244,7 @@ public class DBStore implements Store {
             statement.setString(2, password);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"), rs.getString("email"), rs.getTimestamp("create_date"), new Role(Integer.parseInt(rs.getString("role_id")), rs.getString("role")));
+                    user = new Users(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"), rs.getString("email"), rs.getTimestamp("create_date"), new Role(Integer.parseInt(rs.getString("role_id")), rs.getString("role")), new Country(rs.getInt("country_id"), rs.getString("country")), new City(rs.getInt("city_id"), rs.getString("city"), rs.getInt("country_id")));
                 }
             }
         } catch (SQLException e) {
@@ -254,5 +268,93 @@ public class DBStore implements Store {
             LOGGER.error(e.getMessage(), e);
         }
         return roles;
+    }
+
+    @Override
+    public List<Country> countryAll() {
+        List<Country> countries = new ArrayList<>();
+        try (Connection con = this.dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(settings.getValue("countryAll"))) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    countries.add(new Country(resultSet.getInt("id"), resultSet.getString("country")));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return countries;
+    }
+
+    @Override
+    public List<City> cityByNameCountry(Integer idCountry) {
+        List<City> cities = new ArrayList<>();
+        try (Connection con = this.dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(settings.getValue("cityAll"))) {
+            statement.setInt(1, idCountry);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    cities.add( new City(rs.getInt("id"), rs.getString("city"), rs.getInt("country_id")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
+        }
+        return cities;
+    }
+
+    @Override
+    public Country countryByName(String name) {
+        Country country = null;
+        try (Connection con = this.dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(settings.getValue("countryByName"))) {
+            statement.setString(1, name);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    country = new Country(rs.getInt("id"), rs.getString("country"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
+        }
+        return country;
+    }
+
+    @Override
+    public Role roleByName(String name) {
+        Role role = null;
+        try (Connection con = this.dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(settings.getValue("getRole"))) {
+            statement.setString(1, name);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    role = new Role(rs.getInt("id"), rs.getString("role"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
+        }
+        return role;
+    }
+
+    @Override
+    public City cityByName(String name) {
+        City city = null;
+        try (Connection con = this.dataSource.getConnection();
+             PreparedStatement statement = con.prepareStatement(settings.getValue("getCity"))) {
+            statement.setString(1, name);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    city = new City(rs.getInt("id"), rs.getString("city"), rs.getInt("country_id"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
+        }
+        return city;
     }
 }
