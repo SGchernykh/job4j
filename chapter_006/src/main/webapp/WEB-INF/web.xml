@@ -5,4 +5,28 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
+    <servlet>
+        <servlet-name>ShowItemsServlet</servlet-name>
+        <servlet-class>ru.job4j.todolist.servlet.ShowItemsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowItemsServlet</servlet-name>
+        <url-pattern>/show</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateItemsServlet</servlet-name>
+        <servlet-class>ru.job4j.todolist.servlet.CreateItemsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateItemsServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateItemsServlet</servlet-name>
+        <servlet-class>ru.job4j.todolist.servlet.UpdateItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateItemsServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
 </web-app>
