@@ -7,11 +7,13 @@ package ru.job4j.todolist.store;
  */
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import ru.job4j.todolist.model.Item;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class DBstore implements Store {
     private static final Store INSTANCE = new DBstore();
@@ -32,52 +34,57 @@ public class DBstore implements Store {
 
     @Override
     public void createItem(Item newItem) {
-        Session session = this.factory.openSession();
-        session.beginTransaction();
-        Item item = new Item();
-        item.setDescription(newItem.getDescription());
-        item.setDone(newItem.getDone());
-        item.setCreated(newItem.getCreated());
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-
+        this.tx(session -> session.save(newItem));
     }
 
     @Override
     public List<Item> getAll() {
-        List<Item> items = null;
-        Session session = this.factory.openSession();
-        session.beginTransaction();
-        items = session.createQuery("from Item").list();
-        session.getTransaction().commit();
-        session.close();
-        return items;
+        return this.tx(session -> session.createQuery("from Item").list());
     }
 
     @Override
-    public void update(Item newItem) {
-        Session session = this.factory.openSession();
-        session.beginTransaction();
-        session.update(newItem);
-        session.getTransaction().commit();
-        session.close();
+    public boolean update(Item newItem) {
+        return this.tx(
+                session -> {
+                    session.update(newItem);
+                    return true;
+                }
+        );
     }
 
     @Override
     public Item findById(int id) {
-        Session session = this.factory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from Item where id =:idNew");
-        query.setParameter("idNew", id);
-        Item item = (Item) query.list().get(0);
-        session.getTransaction().commit();
-        session.close();
-        return item;
+        return this.tx(
+                session -> {
+                    Query query = session.createQuery("from Item where id =:idNew");
+                    query.setParameter("idNew", id);
+                    return (Item) query.list().get(0);
+                }
+        );
     }
 
     @Override
     protected void finalize() throws Throwable {
         this.factory.close();
+    }
+
+    /**
+     * Pattern wrapper.
+     * @param command
+     * @param <T>
+     * @return
+     */
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            return command.apply(session);
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 }

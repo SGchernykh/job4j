@@ -33,5 +33,5 @@ public interface Store {
      * Update done Item
      * @param newItem
      */
-    void update(Item newItem);
+    boolean update(Item newItem);
 }
