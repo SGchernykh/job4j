@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="03072018-" author="autor">
+        <comment>Создание таблиц</comment>
+        <createTable tableName="car_body">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="engine">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="transmission">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="car">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="car_body_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="car_body_id"
+                             references="car_body(id)"/>
+            </column>
+            <column name="engine_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="engine_id"
+                             references="engine(id)"/>
+            </column>
+            <column name="transmission_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="transmission_id"
+                             references="transmission(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
