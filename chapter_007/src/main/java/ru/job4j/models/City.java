@@ -1,9 +1,22 @@
 package ru.job4j.models;
 
-public class Engine {
+/**
+ * City.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
+import javax.persistence.*;
+
+@Entity
+@Table(name = "city")
+public class City {
     private int id;
     private String name;
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -12,6 +25,7 @@ public class Engine {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }

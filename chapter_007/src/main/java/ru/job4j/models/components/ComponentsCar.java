@@ -1,9 +1,19 @@
-package ru.job4j.models;
+package ru.job4j.models.components;
 
-public class Transmission {
+/**
+ * ComponentsCar.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
+import javax.persistence.*;
+
+public abstract class ComponentsCar {
     private int id;
     private String name;
 
+    @Id
+    @GeneratedValue
     public int getId() {
         return id;
     }
@@ -12,6 +22,7 @@ public class Transmission {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }

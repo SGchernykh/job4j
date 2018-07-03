@@ -1,0 +1,16 @@
+<hibernate-mapping>
+    <class name="ru.job4j.models.SaleOrder" table="sale_order">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="title" column="title"/>
+        <property name="description" column="description"/>
+        <property name="sale" column="sale"/>
+        <many-to-one name="author" column="author_id" class="ru.job4j.models.User" lazy="false"/>
+        <property name="created" column="created"/>
+        <many-to-one name="city" column="city_id" class="ru.job4j.models.City" lazy="false"/>
+        <property name="price" column="price"/>
+        <many-to-one name="car" column="car_id" class="ru.job4j.models.Car" lazy="false"/>
+        <many-to-one name="photo" column="photo_id" class="ru.job4j.models.Photo" lazy="false"/>
+    </class>
+</hibernate-mapping>

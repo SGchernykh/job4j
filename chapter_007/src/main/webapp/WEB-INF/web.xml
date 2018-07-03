@@ -5,5 +5,137 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
+    <filter>
+        <filter-name>Auth Filter</filter-name>
+        <filter-class>ru.job4j.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Auth Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.SignInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignInServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignOnServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.SignOnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignOnServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetUserSessionServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.GetSessionUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserSessionServlet</servlet-name>
+        <url-pattern>/getUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.ViewOrderJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EngineJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.EngineJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EngineJsonServlet</servlet-name>
+        <url-pattern>/engine</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TransmissionJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.TransmissionJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TransmissionJsonServlet</servlet-name>
+        <url-pattern>/transmission</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BrandJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.BrandJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BrandJsonServlet</servlet-name>
+        <url-pattern>/brand</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ModelJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.ModelJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModelJsonServlet</servlet-name>
+        <url-pattern>/model</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarBodyJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.CarBodyJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarBodyJsonServlet</servlet-name>
+        <url-pattern>/carBody</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DriveUnitJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.DriveUnitJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DriveUnitJsonServlet</servlet-name>
+        <url-pattern>/driveUnit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CityJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.json.CityJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CityJsonServlet</servlet-name>
+        <url-pattern>/city</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.CreateOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateSaleServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.UpdateSaleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateSaleServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>ru.job4j.servlet.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
 </web-app>

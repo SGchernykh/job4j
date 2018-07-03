@@ -9,9 +9,16 @@
         <property name="connection.characterEncoding">UTF-8</property>
         <property name="show_sql">true</property>
 
-        <mapping resource="ru/job4j/models/Car.hbm.xml"/>
-        <mapping resource="ru/job4j/models/CarBody.hbm.xml"/>
-        <mapping resource="ru/job4j/models/Engine.hbm.xml"/>
-        <mapping resource="ru/job4j/models/Transmission.hbm.xml"/>
+        <mapping class="ru.job4j.models.components.Model"/>
+        <mapping class="ru.job4j.models.components.Brand"/>
+        <mapping class="ru.job4j.models.components.CarBody"/>
+        <mapping class="ru.job4j.models.components.Transmission"/>
+        <mapping class="ru.job4j.models.components.Engine"/>
+        <mapping class="ru.job4j.models.components.DriveUnit"/>
+        <mapping class="ru.job4j.models.SaleOrder"/>
+        <mapping class="ru.job4j.models.User"/>
+        <mapping class="ru.job4j.models.Car"/>
+        <mapping class="ru.job4j.models.Photo"/>
+        <mapping class="ru.job4j.models.City"/>
     </session-factory>
 </hibernate-configuration>
