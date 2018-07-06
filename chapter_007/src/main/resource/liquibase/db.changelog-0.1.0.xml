@@ -251,5 +251,11 @@
             <column name="name" value="Focus"/>
             <column name="brand_id" type="BIGINT" valueNumeric="5"/>
         </insert>
+
+
+
+        <insert tableName="city">
+            <column name="name" value="Ekb"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
