@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="04072018-1" author="autor">
+        <insert tableName="engine">
+            <column name="name" value="Gasoline"/>
+        </insert>
+        <insert tableName="engine">
+            <column name="name" value="Diesel"/>
+        </insert>
+        <insert tableName="engine">
+            <column name="name" value="Hybrid"/>
+        </insert>
+        <insert tableName="engine">
+            <column name="name" value="Electronic"/>
+        </insert>
+        <insert tableName="engine">
+            <column name="name" value="Gas"/>
+        </insert>
+
+
+
+        <insert tableName="drive_unit">
+            <column name="name" value="Front"/>
+        </insert>
+        <insert tableName="drive_unit">
+            <column name="name" value="Rear"/>
+        </insert>
+        <insert tableName="drive_unit">
+            <column name="name" value="Full"/>
+        </insert>
+
+
+
+        <insert tableName="car_body">
+            <column name="name" value="Sedan"/>
+        </insert>
+        <insert tableName="car_body">
+            <column name="name" value="Hatchback"/>
+        </insert>
+        <insert tableName="car_body">
+            <column name="name" value="Universal"/>
+        </insert>
+        <insert tableName="car_body">
+            <column name="name" value="Suv"/>
+        </insert>
+        <insert tableName="car_body">
+            <column name="name" value="Van"/>
+        </insert>
+
+
+
+        <insert tableName="transmission">
+            <column name="name" value="Mechanics"/>
+        </insert>
+        <insert tableName="transmission">
+            <column name="name" value="Automatic"/>
+        </insert>
+        <insert tableName="transmission">
+            <column name="name" value="Robot"/>
+        </insert>
+        <insert tableName="transmission">
+            <column name="name" value="Variator"/>
+        </insert>
+
+
+
+        <insert tableName="brand">
+            <column name="name" value="KIA"/>
+        </insert>
+        <insert tableName="brand">
+            <column name="name" value="LADA"/>
+        </insert>
+        <insert tableName="brand">
+            <column name="name" value="Jeep"/>
+        </insert>
+        <insert tableName="brand">
+            <column name="name" value="Toyota"/>
+        </insert>
+        <insert tableName="brand">
+            <column name="name" value="Ford"/>
+        </insert>
+
+
+
+        <insert tableName="model">
+            <column name="name" value="Ria"/>
+            <column name="brand_id" type="BIGINT" valueNumeric="1"/>
+        </insert>
+        <insert tableName="model">
+            <column name="name" value="Vesta"/>
+            <column name="brand_id" type="BIGINT" valueNumeric="2"/>
+        </insert>
+        <insert tableName="model">
+            <column name="name" value="Patriot"/>
+            <column name="brand_id" type="BIGINT" valueNumeric="3"/>
+        </insert>
+        <insert tableName="model">
+            <column name="name" value="Rav4"/>
+            <column name="brand_id" type="BIGINT" valueNumeric="4"/>
+        </insert>
+        <insert tableName="model">
+            <column name="name" value="Focus"/>
+            <column name="brand_id" type="BIGINT" valueNumeric="5"/>
+        </insert>
+
+
+
+        <insert tableName="city">
+            <column name="name" value="Ekb"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
