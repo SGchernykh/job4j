@@ -1,6 +1,12 @@
 package ru.job4j.config;
 
-import liquibase.integration.spring.SpringLiquibase;
+/**
+ * Configuration.
+ * SpringWebConfig.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

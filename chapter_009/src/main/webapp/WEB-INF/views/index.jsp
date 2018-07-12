@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
-
     <script>
         $(loadAdverts());
         function loadAdverts() {
@@ -23,7 +19,6 @@
                 success: function (data) {
                     result = fillRow(data);
                     document.getElementById("table_body").innerHTML += result;
-                    $("#items").dataTable();
                 }
             });
         }
@@ -64,7 +59,7 @@
     </script>
 
 </head>
-<body>
+<carBody>
 <div class="container">
     <div style="margin-top: 30px">
         <a href="./add" class="btn btn-info" style="width: 100%">Add new Advert</a>
@@ -87,5 +82,5 @@
         </table>
     </div>
 </div>
-</body>
+</carBody>
 </html>

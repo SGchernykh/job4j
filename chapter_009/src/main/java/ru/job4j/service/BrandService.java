@@ -1,5 +1,11 @@
 package ru.job4j.service;
 
+/**
+ * BrandService.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.models.components.Brand;
@@ -13,10 +19,19 @@ public class BrandService {
     @Autowired
     private BrandRepository brandRepository;
 
+    /**
+     * Get All Brand.
+     * @return List Brands.
+     */
     public List<Brand> getAll() {
         return (List<Brand>) this.brandRepository.findAll();
     }
 
+    /**
+     * Get Brand by Name from storage.
+     * @param name Name brand.
+     * @return Brand.
+     */
     public Brand getByName(final String name) {
         return this.brandRepository.findByName(name);
     }

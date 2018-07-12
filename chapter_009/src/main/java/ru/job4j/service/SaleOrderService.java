@@ -1,9 +1,18 @@
 package ru.job4j.service;
 
+/**
+ * SaleOrderService.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.job4j.models.Car;
+import ru.job4j.models.ModelForFillingOrder;
 import ru.job4j.models.SaleOrder;
+import ru.job4j.models.User;
 import ru.job4j.repository.*;
 
 import java.sql.Timestamp;
@@ -16,22 +25,22 @@ public class SaleOrderService {
     private SaleOrderRepository saleOrderRepository;
 
     @Autowired
-    private BrandRepository brandRepository;
+    private BrandService brandService;
 
     @Autowired
-    private ModelRepository modelRepository;
+    private ModelService modelService;
 
     @Autowired
-    private CarBodyRepository carBodyRepository;
+    private CarBodyService carBodyService;
 
     @Autowired
-    private TransmissionRepository transmissionRepository;
+    private TransmissionService transmissionService;
 
     @Autowired
-    private EngineRepository engineRepository;
+    private EngineService engineService;
 
     @Autowired
-    private DriveUnitRepository driveUnitRepository;
+    private DriveUnitService driveUnitService;
 
     @Autowired
     private CarService carService;
@@ -45,19 +54,39 @@ public class SaleOrderService {
     @Autowired
     private PhotoService photoService;
 
-    public SaleOrder save(final SaleOrder saleOrder) {
-        return this.saleOrderRepository.save(saleOrder);
+    /**
+     * Save Car in storage.
+     * @param value Car.
+     * @return Car.
+     */
+    public SaleOrder save(final SaleOrder value) {
+        return this.saleOrderRepository.save(value);
     }
 
+    /**
+     * Get SaleOrder by id from storage.
+     * @param id Id.
+     * @return SaleOrder.
+     */
     public SaleOrder getById(final int id) {
         return this.saleOrderRepository.findById(id).get();
     }
 
+    /**
+     * Get All SaleOrder from storage.
+     * @return List SaleOrder.
+     */
     public List<SaleOrder> getAll() {
         return (List<SaleOrder>) this.saleOrderRepository.findAll();
     }
 
-    public SaleOrder prepareAdvert(final ModelForFillingAdverts model, final MultipartFile file) {
+    /**
+     * Prepare SaleOrder.
+     * @param model Model For Filling Order.
+     * @param file Photo file.
+     * @return SaleOrder.
+     */
+    public SaleOrder prepareSaleOrder(final ModelForFillingOrder model, final MultipartFile file) {
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setAuthor(this.getUser());
         saleOrder.setTitle(model.getTitle());
@@ -65,9 +94,41 @@ public class SaleOrderService {
         saleOrder.setDescription(model.getDescription());
         saleOrder.setPrice(Integer.parseInt(model.getPrice()));
         saleOrder.setCreated(new Timestamp(System.currentTimeMillis()));
-        saleOrder.setPhoto(this.imageService.save(new WritePhotoToDisk().writePhotoToDisk(file)));
+        saleOrder.setPhoto(this.photoService.save(new WritePhotoToDisk().writePhotoToDisk(file)));
         saleOrder.setCar(this.carService.save(this.fillCar(model)));
-        saleOrder.setCity(this.cityService.getByName(model.getCity()));
+        saleOrder.setCity(this.cityService.getById(Integer.parseInt(model.getCity())));
         return saleOrder;
+    }
+
+    /**
+     * Create test user.
+     * @ User
+     */
+    private User getUser() {
+        User user = this.userService.getByName("test");
+        if (user == null) {
+            user = new User();
+            user.setName("test");
+            user.setLogin("test");
+            user.setPassword("test");
+            this.userService.save(user);
+        }
+        return user;
+    }
+
+    /**
+     * Fill Car.
+     * @param model Model For Filling Order.
+     * @return Car.
+     */
+    private Car fillCar(final ModelForFillingOrder model) {
+        Car car = new Car();
+        car.setBrand(brandService.getByName(model.getBrand()));
+        car.setModel(modelService.getById(Integer.parseInt(model.getModel())));
+        car.setCarBody(carBodyService.getById(Integer.parseInt(model.getCarBody())));
+        car.setEngine(engineService.getById(Integer.parseInt(model.getEngine())));
+        car.setTransmission(transmissionService.getById(Integer.parseInt(model.getTransmission())));
+        car.setDriveUnit(driveUnitService.getById(Integer.parseInt(model.getDriveUnit())));
+        return car;
     }
 }

@@ -1,5 +1,11 @@
 package ru.job4j.service;
 
+/**
+ * PhotoService.
+ * @author Sergey Chernykh(chernykh.sergey95@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.models.Photo;
@@ -15,6 +21,11 @@ public class PhotoService {
         return this.photoRepository.save(value);
     }
 
+    /**
+     * Get Photo by id from storage.
+     * @param id Id.
+     * @return Photo.
+     */
     public Photo getById(final int id) {
         return this.photoRepository.findById(id).get();
     }
