@@ -12,6 +12,13 @@ import javax.persistence.*;
 @Table(name = "brand")
 public class Brand extends ComponentsCar {
 
+    public Brand() {
+    }
+
+    public Brand(final int id) {
+        setId(id);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override

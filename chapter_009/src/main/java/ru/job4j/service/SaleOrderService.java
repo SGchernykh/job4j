@@ -9,10 +9,8 @@ package ru.job4j.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.models.Car;
-import ru.job4j.models.ModelForFillingOrder;
-import ru.job4j.models.SaleOrder;
-import ru.job4j.models.User;
+import ru.job4j.models.*;
+import ru.job4j.models.components.*;
 import ru.job4j.repository.*;
 
 import java.sql.Timestamp;
@@ -25,28 +23,7 @@ public class SaleOrderService {
     private SaleOrderRepository saleOrderRepository;
 
     @Autowired
-    private BrandService brandService;
-
-    @Autowired
-    private ModelService modelService;
-
-    @Autowired
-    private CarBodyService carBodyService;
-
-    @Autowired
-    private TransmissionService transmissionService;
-
-    @Autowired
-    private EngineService engineService;
-
-    @Autowired
-    private DriveUnitService driveUnitService;
-
-    @Autowired
     private CarService carService;
-
-    @Autowired
-    private CityService cityService;
 
     @Autowired
     private UserService userService;
@@ -96,7 +73,7 @@ public class SaleOrderService {
         saleOrder.setCreated(new Timestamp(System.currentTimeMillis()));
         saleOrder.setPhoto(this.photoService.save(new WritePhotoToDisk().writePhotoToDisk(file)));
         saleOrder.setCar(this.carService.save(this.fillCar(model)));
-        saleOrder.setCity(this.cityService.getById(Integer.parseInt(model.getCity())));
+        saleOrder.setCity(new City(Integer.parseInt(model.getCity())));
         return saleOrder;
     }
 
@@ -123,12 +100,12 @@ public class SaleOrderService {
      */
     private Car fillCar(final ModelForFillingOrder model) {
         Car car = new Car();
-        car.setBrand(brandService.getByName(model.getBrand()));
-        car.setModel(modelService.getById(Integer.parseInt(model.getModel())));
-        car.setCarBody(carBodyService.getById(Integer.parseInt(model.getCarBody())));
-        car.setEngine(engineService.getById(Integer.parseInt(model.getEngine())));
-        car.setTransmission(transmissionService.getById(Integer.parseInt(model.getTransmission())));
-        car.setDriveUnit(driveUnitService.getById(Integer.parseInt(model.getDriveUnit())));
+        car.setBrand(new Brand(Integer.parseInt(model.getBrand())));
+        car.setModel(new Model(Integer.parseInt(model.getModel())));
+        car.setCarBody(new CarBody(Integer.parseInt(model.getCarBody())));
+        car.setEngine(new Engine(Integer.parseInt(model.getEngine())));
+        car.setTransmission(new Transmission(Integer.parseInt(model.getTransmission())));
+        car.setDriveUnit(new DriveUnit(Integer.parseInt(model.getDriveUnit())));
         return car;
     }
 }

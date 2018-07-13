@@ -14,6 +14,13 @@ public class City {
     private int id;
     private String name;
 
+    public City(int id) {
+        this.id = id;
+    }
+
+    public City() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

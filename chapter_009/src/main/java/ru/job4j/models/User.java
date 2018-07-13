@@ -15,6 +15,13 @@ public class User {
     private String login;
     private String password;
 
+    public User() {
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

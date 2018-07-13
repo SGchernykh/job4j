@@ -13,6 +13,13 @@ public class Model extends ComponentsCar {
 
     private Brand brand;
 
+    public Model() {
+    }
+
+    public Model(int id) {
+        setId(id);
+    }
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
     public Brand getBrand() {
@@ -34,5 +41,15 @@ public class Model extends ComponentsCar {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
     }
 }

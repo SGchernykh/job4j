@@ -11,6 +11,13 @@ import javax.persistence.*;
 @Table(name = "engine")
 public class Engine extends ComponentsCar {
 
+    public Engine() {
+    }
+
+    public Engine(int id) {
+        setId(id);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override
@@ -22,5 +29,15 @@ public class Engine extends ComponentsCar {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
     }
 }

@@ -53,7 +53,7 @@ public class FillFieldsController {
     @GetMapping("/carModel")
     public @ResponseBody
     List<Model> getModels(@RequestParam String brand) {
-        return this.modelService.getModelByBrandId(this.brandService.getByName(brand).getId());
+        return this.modelService.getModelByBrandId(Integer.parseInt(brand));
     }
 
     @GetMapping("/engine")

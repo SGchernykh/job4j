@@ -22,7 +22,7 @@
                 success: function (data) {
                     $.each(data, function (i, val) {
                         document.getElementById("brand").innerHTML +=
-                            "<option value=" + val.name + ">" + val.name + "</option>"
+                            "<option value=" + val.id + ">" + val.name + "</option>"
                     });
                     loadModel();
                 }
