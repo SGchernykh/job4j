@@ -13,5 +13,5 @@ import ru.job4j.models.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    User findByName(final String name);
+    User findByLogin(final String login);
 }

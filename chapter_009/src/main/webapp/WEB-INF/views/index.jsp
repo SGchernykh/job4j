@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +23,16 @@
         }
         function fillRow(data) {
             var row = "";
+            var check = false;
+            var currentUserLogin = "${pageContext.request.userPrincipal.name}";
             $.each(data, function (i, saleOrder) {
-                row += "<tr>" +
+                check = currentUserLogin === saleOrder.author.login;
+                if (check) {
+                    row += "<tr class='success'>";
+                } else {
+                    row += "<tr>";
+                }
+                row +=
                     "<td class='table-td'><img src='./image/" + saleOrder.photo.id + "' alt='Not Photo'" +
                     " style='display: block; width: 100%; margin: 0 auto'></td>" +
                     "<td class='size'>" + saleOrder.title + "<br/>" +
@@ -42,7 +49,12 @@
                     row += "<td class='table-td'>" +
                         "<input type='checkbox' id='sale' onchange='changeBox(" + saleOrder.id + ")'";
                 }
-                row += "'></td></tr>";
+                if (!check) {
+                    row += "' disabled>"
+                } else {
+                    row += "'>";
+                }
+                row += "</td></tr>";
             });
             return row;
         }
@@ -59,10 +71,11 @@
     </script>
 
 </head>
-<carBody>
+<body>
 <div class="container">
     <div style="margin-top: 30px">
-        <a href="./add" class="btn btn-info" style="width: 100%">Add new Advert</a>
+        <a href="./add" class="btn btn-info" style="width: 40%">Add new Order</a>
+        <a href="./login?logout" class="btn btn-info" style="width: 40%; float: right">Log Out</a>
     </div>
 </div>
 <div class="container" style="margin-top: 30px">
@@ -82,5 +95,5 @@
         </table>
     </div>
 </div>
-</carBody>
+</body>
 </html>

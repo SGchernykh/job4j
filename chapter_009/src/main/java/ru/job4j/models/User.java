@@ -14,6 +14,7 @@ public class User {
     private String name;
     private String login;
     private String password;
+    private Role role;
 
     public User() {
     }
@@ -58,5 +59,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

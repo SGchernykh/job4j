@@ -12,18 +12,24 @@
 <body>
 <div class="container">
     <div class="col col-md-4">
-        <h2>Sign In</h2>
-        <form name="login" action="./login" method="post" style="width: 300px">
+        <c:if test="${error}">
+            <div class="alert alert-danger" role="alert" style="margin-top: 10px; width: 300px">Invalid Login or Password</div>
+        </c:if>
+        <h2>Sign On</h2>
+        <form name="register" action="./register" method="post" style="width: 300px">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" autofocus>
+            </div>
             <div class="form-group">
                 <label for="login">Login:</label>
-                <input type="text" class="form-control" id="login" placeholder="Enter login" name="login" autofocus>
+                <input type="text" class="form-control" id="login" placeholder="Enter login" name="login">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
             </div>
-            <button type="submit" class="btn btn-info">Sign In</button>
-            <a href="./register" class="btn btn-info" style="float: right">Create account</a>
+            <button type="submit" class="btn btn-info">Sign On</button>
         </form>
     </div>
 </div>

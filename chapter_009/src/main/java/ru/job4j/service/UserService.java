@@ -7,12 +7,23 @@ package ru.job4j.service;
  * @since 0.1
  */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.job4j.models.Role;
 import ru.job4j.models.User;
 import ru.job4j.repository.UserRepository;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private UserRepository userRepository;
@@ -37,10 +48,18 @@ public class UserService {
 
     /**
      * Get user bu name from storage.
-     * @param name name.
+     * @param login login.
      * @return user.
      */
-    public User getByName(final String name) {
-        return userRepository.findByName(name);
+    public User getByLogin(final String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    public void regUser(final User user) {
+        String pass = user.getPassword();
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setRole(new Role(1));
+        this.save(user);
+        securityService.autoLogin(user.getLogin(), pass);
     }
 }

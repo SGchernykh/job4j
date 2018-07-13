@@ -31,6 +31,9 @@ public class SaleOrderService {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private SecurityService securityService;
+
     /**
      * Save Car in storage.
      * @param value Car.
@@ -82,14 +85,7 @@ public class SaleOrderService {
      * @ User
      */
     private User getUser() {
-        User user = this.userService.getByName("test");
-        if (user == null) {
-            user = new User();
-            user.setName("test");
-            user.setLogin("test");
-            user.setPassword("test");
-            this.userService.save(user);
-        }
+        User user = this.userService.getByLogin(this.securityService.findLoggedUser());
         return user;
     }
 

@@ -114,5 +114,12 @@
         <insert tableName="city">
             <column name="name" value="Ekb"/>
         </insert>
+
+
+
+
+        <insert tableName="role">
+            <column name="role" value="user"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
