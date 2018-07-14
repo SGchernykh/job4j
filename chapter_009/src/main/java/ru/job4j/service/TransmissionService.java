@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class TransmissionService {
+    private TransmissionRepository transmissionRepository;
 
     @Autowired
-    private TransmissionRepository transmissionRepository;
+    public TransmissionService(TransmissionRepository transmissionRepository) {
+        this.transmissionRepository = transmissionRepository;
+    }
 
     /**
      * Get All Transmission from storage.

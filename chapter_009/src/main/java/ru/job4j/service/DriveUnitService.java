@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class DriveUnitService {
+    private DriveUnitRepository driveUnitRepository;
 
     @Autowired
-    private DriveUnitRepository driveUnitRepository;
+    public DriveUnitService(DriveUnitRepository driveUnitRepository) {
+        this.driveUnitRepository = driveUnitRepository;
+    }
 
     /**
      * Get All DriveUnit from storage.

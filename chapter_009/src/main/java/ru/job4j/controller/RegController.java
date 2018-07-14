@@ -10,9 +10,12 @@ import ru.job4j.service.UserService;
 
 @Controller
 public class RegController {
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public RegController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/register")
     public ModelAndView registerPage() {

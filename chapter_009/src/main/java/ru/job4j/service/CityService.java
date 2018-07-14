@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class CityService {
+    private CityRepository cityRepository;
 
     @Autowired
-    private CityRepository cityRepository;
+    public CityService(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
+    }
 
     /**
      * Get All City from storage.

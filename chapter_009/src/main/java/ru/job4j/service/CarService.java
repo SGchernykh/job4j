@@ -13,9 +13,12 @@ import ru.job4j.repository.CarRepository;
 
 @Service
 public class CarService {
+    private CarRepository carRepository;
 
     @Autowired
-    private CarRepository carRepository;
+    public CarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
 
     /**
      * Save Car in storage.

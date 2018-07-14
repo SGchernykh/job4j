@@ -21,9 +21,12 @@ import java.io.IOException;
 
 @Controller
 public class PhotoController {
+    private PhotoService photoService;
 
     @Autowired
-    private PhotoService photoService;
+    public PhotoController(PhotoService photoService) {
+        this.photoService = photoService;
+    }
 
     @ResponseBody
     @GetMapping(value = "/image/{photoID}", produces = MediaType.IMAGE_PNG_VALUE)

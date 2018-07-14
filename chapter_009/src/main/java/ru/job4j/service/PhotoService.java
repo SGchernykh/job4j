@@ -13,9 +13,12 @@ import ru.job4j.repository.PhotoRepository;
 
 @Service
 public class PhotoService {
+    private PhotoRepository photoRepository;
 
     @Autowired
-    private PhotoRepository photoRepository;
+    public PhotoService(PhotoRepository photoRepository) {
+        this.photoRepository = photoRepository;
+    }
 
     public Photo save(final Photo value) {
         return this.photoRepository.save(value);

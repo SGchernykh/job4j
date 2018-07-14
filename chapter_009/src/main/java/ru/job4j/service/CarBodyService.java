@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class CarBodyService {
+    private CarBodyRepository carBodyRepository;
 
     @Autowired
-    private CarBodyRepository carBodyRepository;
+    public CarBodyService(CarBodyRepository carBodyRepository) {
+        this.carBodyRepository = carBodyRepository;
+    }
 
     /**
      * Get All CarBody from storage.

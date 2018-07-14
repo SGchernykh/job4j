@@ -20,9 +20,12 @@ import java.util.List;
 
 @Controller
 public class SaleOrderController {
+    private SaleOrderService saleOrderService;
 
     @Autowired
-    private SaleOrderService saleOrderService;
+    public SaleOrderController(SaleOrderService saleOrderService) {
+        this.saleOrderService = saleOrderService;
+    }
 
     @GetMapping(value = "/")
     public ModelAndView getSaleOrder() {

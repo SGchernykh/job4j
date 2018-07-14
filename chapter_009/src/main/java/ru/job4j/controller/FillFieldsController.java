@@ -21,27 +21,25 @@ import java.util.List;
 
 @Controller
 public class FillFieldsController {
-    @Autowired
+
     private CarBodyService carBodyService;
-
-    @Autowired
     private ModelService modelService;
-
-    @Autowired
     private BrandService brandService;
-
-    @Autowired
     private DriveUnitService driveUnitService;
-
-    @Autowired
     private EngineService engineService;
-
-    @Autowired
     private TransmissionService transmissionService;
-
-    @Autowired
     private CityService cityService;
 
+    @Autowired
+    public FillFieldsController(CarBodyService carBodyService, ModelService modelService, BrandService brandService, DriveUnitService driveUnitService, EngineService engineService, TransmissionService transmissionService, CityService cityService) {
+        this.carBodyService = carBodyService;
+        this.modelService = modelService;
+        this.brandService = brandService;
+        this.driveUnitService = driveUnitService;
+        this.engineService = engineService;
+        this.transmissionService = transmissionService;
+        this.cityService = cityService;
+    }
 
     @GetMapping("/carBrand")
     public @ResponseBody

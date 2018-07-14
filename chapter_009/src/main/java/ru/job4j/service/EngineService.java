@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class EngineService {
+    private EngineRepository engineRepository;
 
     @Autowired
-    private EngineRepository engineRepository;
+    public EngineService(EngineRepository engineRepository) {
+        this.engineRepository = engineRepository;
+    }
 
     /**
      * Get All Engine from storage.

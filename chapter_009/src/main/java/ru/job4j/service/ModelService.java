@@ -15,9 +15,12 @@ import java.util.List;
 
 @Service
 public class ModelService {
+    private ModelRepository modelRepository;
 
     @Autowired
-    private ModelRepository modelRepository;
+    public ModelService(ModelRepository modelRepository) {
+        this.modelRepository = modelRepository;
+    }
 
     /**
      * Get Model by id from storage.
