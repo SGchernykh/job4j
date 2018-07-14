@@ -19,20 +19,20 @@ import java.util.List;
 @Service
 public class SaleOrderService {
 
-    @Autowired
-    private SaleOrderRepository saleOrderRepository;
-
-    @Autowired
     private CarService carService;
-
-    @Autowired
+    private SaleOrderRepository saleOrderRepository;
     private UserService userService;
-
-    @Autowired
     private PhotoService photoService;
+    private SecurityService securityService;
 
     @Autowired
-    private SecurityService securityService;
+    public SaleOrderService(CarService carService, SaleOrderRepository saleOrderRepository, UserService userService, PhotoService photoService, SecurityService securityService) {
+        this.carService = carService;
+        this.saleOrderRepository = saleOrderRepository;
+        this.userService = userService;
+        this.photoService = photoService;
+        this.securityService = securityService;
+    }
 
     /**
      * Save Car in storage.
@@ -75,7 +75,7 @@ public class SaleOrderService {
         saleOrder.setPrice(Integer.parseInt(model.getPrice()));
         saleOrder.setCreated(new Timestamp(System.currentTimeMillis()));
         saleOrder.setPhoto(this.photoService.save(new WritePhotoToDisk().writePhotoToDisk(file)));
-        saleOrder.setCar(this.carService.save(this.fillCar(model)));
+        saleOrder.setCar(this.carService.save(fillCar(model)));
         saleOrder.setCity(new City(Integer.parseInt(model.getCity())));
         return saleOrder;
     }

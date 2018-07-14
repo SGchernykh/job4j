@@ -15,18 +15,17 @@ import ru.job4j.repository.UserRepository;
 
 @Service
 public class UserService {
-
-    @Autowired
     private BCryptPasswordEncoder encoder;
-
-    @Autowired
     private SecurityService securityService;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(BCryptPasswordEncoder encoder, SecurityService securityService, UserRepository userRepository) {
+        this.encoder = encoder;
+        this.securityService = securityService;
+        this.userRepository = userRepository;
+    }
+
 
     /**
      * Save User in storage.

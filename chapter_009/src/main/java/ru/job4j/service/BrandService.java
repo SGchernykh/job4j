@@ -26,13 +26,4 @@ public class BrandService {
     public List<Brand> getAll() {
         return (List<Brand>) this.brandRepository.findAll();
     }
-
-    /**
-     * Get Brand by Name from storage.
-     * @param name Name brand.
-     * @return Brand.
-     */
-    public Brand getByName(final String name) {
-        return this.brandRepository.findByName(name);
-    }
 }
