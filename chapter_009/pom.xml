@@ -6,6 +6,9 @@
     <artifactId>chapter_009</artifactId>
     <packaging>war</packaging>
 
+    <modules>
+        <module>boost</module>
+    </modules>
     <parent>
         <artifactId>junior</artifactId>
         <groupId>ru.job4j</groupId>
