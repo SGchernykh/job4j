@@ -8,12 +8,14 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.domain.components.Transmission;
 import ru.job4j.repository.TransmissionRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class TransmissionService {
     private TransmissionRepository transmissionRepository;
 
@@ -26,6 +28,7 @@ public class TransmissionService {
      * Get All Transmission from storage.
      * @return List Transmission.
      */
+    @Transactional(readOnly = true)
     public List<Transmission> getAll() {
         return (List<Transmission>) this.transmissionRepository.findAll();
     }
@@ -35,6 +38,7 @@ public class TransmissionService {
      * @param id Id.
      * @return Transmission.
      */
+    @Transactional(readOnly = true)
     public Transmission getById(final int id) {
         return this.transmissionRepository.findById(id);
     }

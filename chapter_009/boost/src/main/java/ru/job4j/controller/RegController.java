@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.job4j.domain.User;
 import ru.job4j.service.UserService;
 
 @Controller
+@RequestMapping("/register")
 public class RegController {
     private UserService userService;
 
@@ -17,14 +19,14 @@ public class RegController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/register")
+    @GetMapping
     public ModelAndView registerPage() {
         ModelAndView view = new ModelAndView();
         view.setViewName("register");
         return view;
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping
     public ModelAndView regUser(final User user) {
         ModelAndView view = new ModelAndView();
         User u = this.userService.getByLogin(user.getLogin());

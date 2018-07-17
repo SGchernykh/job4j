@@ -8,12 +8,14 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.domain.components.Brand;
 import ru.job4j.repository.BrandRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class BrandService {
     private BrandRepository brandRepository;
 
@@ -26,6 +28,7 @@ public class BrandService {
      * Get All Brand.
      * @return List Brands.
      */
+    @Transactional(readOnly = true)
     public List<Brand> getAll() {
         return (List<Brand>) this.brandRepository.findAll();
     }

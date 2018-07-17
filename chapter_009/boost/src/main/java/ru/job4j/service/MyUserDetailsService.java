@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class MyUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
     private UserService userService;
 

@@ -7,9 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 public class SecurityService {
     private AuthenticationManager authenticationManager;
     private MyUserDetailsService detailsService;
@@ -20,11 +22,13 @@ public class SecurityService {
         this.detailsService = detailsService;
     }
 
+    @Transactional(readOnly = true)
     public String findLoggedUser() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getUsername();
     }
 
+    @Transactional(readOnly = true)
     public void autoLogin(final String userName, final String password) {
         UserDetails userDetails = this.detailsService.loadUserByUsername(userName);
         UsernamePasswordAuthenticationToken token =

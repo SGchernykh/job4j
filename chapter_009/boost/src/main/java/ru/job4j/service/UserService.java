@@ -9,10 +9,12 @@ package ru.job4j.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.domain.User;
 import ru.job4j.repository.UserRepository;
 
 @Service
+@Transactional
 public class UserService {
     private BCryptPasswordEncoder encoder;
     private SecurityService securityService;
@@ -40,6 +42,7 @@ public class UserService {
      * @param value User.
      * @return User.
      */
+    @Transactional
     public User save(final User value) {
         return this.userRepository.save(value);
     }
@@ -49,6 +52,7 @@ public class UserService {
      * @param id id.
      * @return user.
      */
+    @Transactional(readOnly = true)
     public User getById(final int id) {
         return this.userRepository.findById(id).get();
     }
@@ -58,10 +62,12 @@ public class UserService {
      * @param login login.
      * @return user.
      */
+    @Transactional(readOnly = true)
     public User getByLogin(final String login) {
         return userRepository.findByLogin(login);
     }
 
+    @Transactional
     public void regUser(final User user) {
         String pass = user.getPassword();
         user.setPassword(encoder.encode(user.getPassword()));
