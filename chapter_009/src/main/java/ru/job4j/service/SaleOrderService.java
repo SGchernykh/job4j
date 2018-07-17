@@ -8,6 +8,7 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.models.*;
 import ru.job4j.models.components.*;
@@ -17,8 +18,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
+@Transactional
 public class SaleOrderService {
-
     private CarService carService;
     private SaleOrderRepository saleOrderRepository;
     private UserService userService;
@@ -39,6 +40,7 @@ public class SaleOrderService {
      * @param value Car.
      * @return Car.
      */
+    @Transactional
     public SaleOrder save(final SaleOrder value) {
         return this.saleOrderRepository.save(value);
     }
@@ -48,6 +50,7 @@ public class SaleOrderService {
      * @param id Id.
      * @return SaleOrder.
      */
+    @Transactional(readOnly = true)
     public SaleOrder getById(final int id) {
         return this.saleOrderRepository.findById(id).get();
     }
@@ -56,6 +59,7 @@ public class SaleOrderService {
      * Get All SaleOrder from storage.
      * @return List SaleOrder.
      */
+    @Transactional(readOnly = true)
     public List<SaleOrder> getAll() {
         return (List<SaleOrder>) this.saleOrderRepository.findAll();
     }
@@ -66,6 +70,7 @@ public class SaleOrderService {
      * @param file Photo file.
      * @return SaleOrder.
      */
+    @Transactional(readOnly = true)
     public SaleOrder prepareSaleOrder(final ModelForFillingOrder model, final MultipartFile file) {
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setAuthor(this.getUser());

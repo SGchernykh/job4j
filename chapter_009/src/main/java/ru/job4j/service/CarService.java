@@ -8,10 +8,12 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.models.Car;
 import ru.job4j.repository.CarRepository;
 
 @Service
+@Transactional
 public class CarService {
     private CarRepository carRepository;
 
@@ -25,6 +27,7 @@ public class CarService {
      * @param value Car.
      * @return Car.
      */
+    @Transactional
     public Car save(final Car value) {
         return this.carRepository.save(value);
     }

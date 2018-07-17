@@ -8,12 +8,14 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.models.components.Engine;
 import ru.job4j.repository.EngineRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class EngineService {
     private EngineRepository engineRepository;
 
@@ -26,6 +28,7 @@ public class EngineService {
      * Get All Engine from storage.
      * @return List Engine.
      */
+    @Transactional(readOnly = true)
     public List<Engine> getAll() {
         return (List<Engine>) this.engineRepository.findAll();
     }
@@ -35,6 +38,7 @@ public class EngineService {
      * @param id Id.
      * @return Engine.
      */
+    @Transactional(readOnly = true)
     public Engine getById(final int id) {
         return this.engineRepository.findById(id);
     }

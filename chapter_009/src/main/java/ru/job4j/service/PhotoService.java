@@ -8,6 +8,7 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.models.Photo;
 import ru.job4j.repository.PhotoRepository;
 
@@ -20,6 +21,7 @@ public class PhotoService {
         this.photoRepository = photoRepository;
     }
 
+    @Transactional
     public Photo save(final Photo value) {
         return this.photoRepository.save(value);
     }
@@ -29,6 +31,7 @@ public class PhotoService {
      * @param id Id.
      * @return Photo.
      */
+    @Transactional(readOnly = true)
     public Photo getById(final int id) {
         return this.photoRepository.findById(id).get();
     }

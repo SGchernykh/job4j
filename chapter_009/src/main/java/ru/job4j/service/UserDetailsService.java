@@ -14,10 +14,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserDetailsService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     @Transactional(readOnly = true)

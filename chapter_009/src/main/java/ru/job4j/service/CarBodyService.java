@@ -8,12 +8,14 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.models.components.CarBody;
 import ru.job4j.repository.CarBodyRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CarBodyService {
     private CarBodyRepository carBodyRepository;
 
@@ -26,6 +28,7 @@ public class CarBodyService {
      * Get All CarBody from storage.
      * @return List CarBody.
      */
+    @Transactional(readOnly = true)
     public List<CarBody> getAll() {
         return (List<CarBody>) this.carBodyRepository.findAll();
     }
@@ -35,6 +38,7 @@ public class CarBodyService {
      * @param id Id.
      * @return CarBody.
      */
+    @Transactional(readOnly = true)
     public CarBody getById(final int id) {
         return this.carBodyRepository.findById(id);
     }

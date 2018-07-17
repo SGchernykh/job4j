@@ -8,12 +8,14 @@ package ru.job4j.service;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.models.components.Model;
 import ru.job4j.repository.ModelRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ModelService {
     private ModelRepository modelRepository;
 
@@ -27,6 +29,7 @@ public class ModelService {
      * @param id Id.
      * @return Model.
      */
+    @Transactional(readOnly = true)
     public Model getById(final int id) {
         return this.modelRepository.findById(id);
     }
@@ -35,6 +38,7 @@ public class ModelService {
      * Get All Model with brand_id from storage.
      * @return List Model.
      */
+    @Transactional(readOnly = true)
     public List<Model> getModelByBrandId(final int id) {
         return this.modelRepository.findByBrandId(id);
     }
