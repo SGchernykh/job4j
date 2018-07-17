@@ -70,7 +70,7 @@ public class SaleOrderService {
      * @param file Photo file.
      * @return SaleOrder.
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public SaleOrder prepareSaleOrder(final ModelForFillingOrder model, final MultipartFile file) {
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setAuthor(this.getUser());
