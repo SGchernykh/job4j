@@ -33,16 +33,11 @@ public class UserService {
         this.securityService = securityService;
     }
 
-    public SecurityService getSecurityService() {
-        return securityService;
-    }
-
     /**
      * Save User in storage.
      * @param value User.
      * @return User.
      */
-    @Transactional
     public User save(final User value) {
         return this.userRepository.save(value);
     }
@@ -67,12 +62,11 @@ public class UserService {
         return userRepository.findByLogin(login);
     }
 
-    @Transactional
     public void regUser(final User user) {
         String pass = user.getPassword();
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole(this.roleService.getRoleById(1));
         this.save(user);
-        getSecurityService().autoLogin(user.getLogin(), pass);
+        this.securityService.autoLogin(user.getLogin(), pass);
     }
 }
