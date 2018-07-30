@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/todo</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">root</property>
+
+        <!-- Using hibernate.c3p0 to turn off rudimentary Hibernate's internal connection pool -->
+        <property name="c3p0.min_size">5</property>
+        <property name="c3p0.max_size">20</property>
+        <property name="c3p0.timeout">1800</property>
+        <property name="c3p0.max_statements">50</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+
+        <!-- Print SQL to stdout. -->
+        <property name="show_sql">true</property>
+
+        <!-- Mappings -->
+        <mapping class="ru.todo.domain.Task" />
+    </session-factory>
+</hibernate-configuration>

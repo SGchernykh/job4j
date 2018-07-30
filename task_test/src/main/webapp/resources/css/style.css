@@ -1,0 +1,21 @@
+.table-td {
+    text-align: center;
+    width: 10%;
+}
+.size {
+    width: 35%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px;
+    text-overflow: ellipsis;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+}
